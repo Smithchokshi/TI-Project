@@ -38,7 +38,7 @@ const Routing = () => {
     };
 
     return (
-        <Suspense className="loader" fallback={}>
+        <Suspense className="loader" fallback={<></>}>
             <Layout style={{ minHeight: '100vh', display: 'flex' }}>
                 <Routes>
                     {PublicRoutes.map(route => (
