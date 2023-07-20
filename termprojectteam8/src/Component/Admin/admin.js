@@ -38,7 +38,7 @@ const DrivingTestForm = () => {
 
   return (
     <div>
-      <h2>Add New Date and Time Slot for Driving Test</h2>
+      <h2>New Date and Time Slots for Driving Test</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Date:
