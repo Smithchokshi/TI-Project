@@ -6,7 +6,6 @@ import HeaderWithImage from "./Component/Header/header";
 const Login = lazy(() => import('./Component/Login/login'));
 const Register = lazy(() => import('./Component/Register/register'));
 const Appointment = lazy(() => import('./Component/Appointment/appointment'));
-
 const Routing = () => {
   const isAuthenticated = localStorage.getItem('isAuthenticated');
   console.log(isAuthenticated);
@@ -28,7 +27,7 @@ const Routing = () => {
 
   const PrivateRoutes = [
     {
-      path: '/admin/appointments',
+      path: '/appointments',
       component: <Appointment />,
     },
   ].filter(cur => cur);
