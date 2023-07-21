@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, useNavigate, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
+import Appointment from "./Component/Appointment/appointment";
 
 const Login = lazy(() => import('./Component/Login/login'));
 const Register = lazy(() => import('./Component/Register/register'));
