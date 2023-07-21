@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { Route, useNavigate, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
 import HeaderWithImage from "./Component/Header/header";
+import Footer from "./Component/Footer/footer"
 
 const Login = lazy(() => import('./Component/Login/login'));
 const Register = lazy(() => import('./Component/Register/register'));
@@ -73,6 +74,7 @@ const Routing = () => {
             />
           ))}
         </Routes>
+        {isAuthenticated && isAuthenticated === 'true' && <Footer />}
       </Layout>
     </Suspense>
   );
