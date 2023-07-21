@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, useNavigate, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
+import HeaderWithImage from "./Component/Header/header";
 
 const Login = lazy(() => import('./Component/Login/login'));
 const Register = lazy(() => import('./Component/Register/register'));
@@ -45,6 +46,7 @@ const Routing = () => {
   return (
     <Suspense className="loader" fallback={<></>}>
       <Layout style={{ minHeight: '100vh', display: 'flex' }}>
+        {isAuthenticated && isAuthenticated === 'true' && <HeaderWithImage />}
         <Routes>
           {PublicRoutes.map(route => (
             <Route
