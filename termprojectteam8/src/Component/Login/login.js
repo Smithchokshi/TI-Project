@@ -72,7 +72,7 @@ const Login = () => {
               message: 'Success',
               description: 'Login Successful',
             });
-            navigate('/appointments');
+            navigate('/dashboard');
           } else {
             notification.error({
               message: 'Error',
