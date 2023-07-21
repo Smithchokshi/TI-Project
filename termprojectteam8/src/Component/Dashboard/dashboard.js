@@ -35,7 +35,6 @@ const MyComponent = () => {
     background: '#f1f1f0',
     borderRadius: '4px',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-
   };
   const appointmentCard = {
     marginTop: '20px',
@@ -120,13 +119,13 @@ const MyComponent = () => {
             <Card style = {innerCardStyle}>
                 <Title style={customStyle}> You can book road test appointment at Access Nova Scotia. Appointment options may vary depending on the location and services available. </Title>
             </Card>
-            <br/>
-                <Row gutter={[16, 16]}>
+                <Row style = {{ marginTop: '15px'}}gutter={[16, 16]}>
                     <Col span={16}>
                         <div className="horizontal-scroll" style={{ height: '350px', paddingLeft: '10px' }}>
                             <div style = {{fontSize: '17px'}}> You need to pay for a road test (driving test) before you can schedule and take the test. Keep a copy of the road test receipt (you need this as proof that you paid for the test). </div>
+                            <br/>
                             <Title style = {{fontSize: '20px'}}>Make sure you have below for online Road Test Booking:</Title>
-                            <ul style = {{fontSize: '17px'}}>
+                            <ul className = "ullist" style = {{fontSize: '17px'}}>
                                 <li>know the type of road test you want to take</li>
                                 <li>have your driver’s licence number (you can find this on the front of your driver’s licence)</li>
                                 <li>know your receipt number</li>
@@ -134,11 +133,11 @@ const MyComponent = () => {
                             </ul>    
                             <Title style = {{fontSize: '20px'}}>After booking: </Title>
                             <div style = {{fontSize: '17px'}}> After you book an appointment, you receive a confirmation email with your confirmation number, location details and the date and time of your appointment. You also receive a reminder the day before your appointment. </div>
+                            <br/>
                             <Title style = {{fontSize: '20px'}}>Cancelling and rescheduling: </Title>
                             <div style = {{fontSize: '17px'}}> If you need to change your appointment, follow this link.</div>                     
                         </div>
                     </Col>
-
                     <Col span={8}>
                         <div style={{ height: '100px', background: '#f1f1f0', textAlign: 'center', borderRadius: '4px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}>
                             <Title style={contactStyle}> Contact </Title>
