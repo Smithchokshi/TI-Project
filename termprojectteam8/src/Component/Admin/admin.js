@@ -37,19 +37,32 @@ const DrivingTestForm = () => {
   };
 
   return (
-    <div>
+     <div className="container">
       <h2>New Date and Time Slots for Driving Test</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Date:
-          <input type="date" value={date} onChange={handleDateChange} />
+          <input
+            className="form-input" // Add the 'form-input' class here
+            type="date"
+            value={date}
+            onChange={handleDateChange}
+          />
         </label>
         <label>
           Time:
-          <input type="time" value={time} onChange={handleTimeChange} step="1800" />
+          <input
+            className="form-input" // Add the 'form-input' class here
+            type="time"
+            value={time}
+            onChange={handleTimeChange}
+            step="1800"
+          />
           {/* Step attribute set to 1800 (30 minutes in seconds) to enforce 30-minute intervals */}
         </label>
-        <button type="submit">Add Date</button>
+        <button className="form-button" type="submit">
+          Add Date
+        </button>
       </form>
 
       <div>
