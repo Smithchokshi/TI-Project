@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './admin.css'; 
+import './admin.css';
 const DrivingTestForm = () => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
@@ -37,7 +37,7 @@ const DrivingTestForm = () => {
   };
 
   return (
-     <div className="container">
+    <div className="container">
       <h2>New Date and Time Slots for Driving Test</h2>
       <form onSubmit={handleSubmit}>
         <label>

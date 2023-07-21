@@ -4,12 +4,15 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  overflow: hidden; /* Hide scrollbars */
-  position: relative; /* Needed for ::before pseudo-element */
-  background-image: url('/public/halifax.png'); /* Replace 'halifax.png' with your image path */
+  overflow: hidden;
+  /* Hide scrollbars */
+  position: relative;
+  /* Needed for ::before pseudo-element */
+  background-image: url('/public/halifax.png');
+  /* Replace 'halifax.png' with your image path */
   background-size: cover;
   background-position: center;
-  
+
 }
 
 /* ::before pseudo-element to create the background blur effect */
@@ -20,8 +23,10 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  filter: blur(8px); /* Adjust the blur intensity as needed */
-  z-index: -1; /* Place behind other content */
+  filter: blur(8px);
+  /* Adjust the blur intensity as needed */
+  z-index: -1;
+  /* Place behind other content */
 }
 
 .container {
@@ -31,7 +36,8 @@ body::before {
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  background-color: rgba(254, 249, 249, 0.063); /* Background color with opacity for the blur effect */
+  background-color: rgba(254, 249, 249, 0.063);
+  /* Background color with opacity for the blur effect */
 }
 
 
@@ -68,8 +74,10 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: transparent; /* Make the form transparent */
-  backdrop-filter: blur(8px); /* Add backdrop blur effect for supporting browsers */
+  background-color: transparent;
+  /* Make the form transparent */
+  backdrop-filter: blur(8px);
+  /* Add backdrop blur effect for supporting browsers */
   border-radius: 10px;
   padding: 20px;
 }
@@ -94,9 +102,12 @@ input[type='time'] {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-bottom: 10px; /* Add some spacing between the input fields */
-  font-family: Arial, sans-serif; /* Set the font-family for the inputs */
-  color: #333; /* Set the font color for the inputs */
+  margin-bottom: 10px;
+  /* Add some spacing between the input fields */
+  font-family: Arial, sans-serif;
+  /* Set the font-family for the inputs */
+  color: #333;
+  /* Set the font color for the inputs */
 }
 
 button {
@@ -144,6 +155,7 @@ li {
   .container {
     width: 100%;
     padding: 10px;
-    height: auto; /* Reset height to fit content */
+    height: auto;
+    /* Reset height to fit content */
   }
 }
