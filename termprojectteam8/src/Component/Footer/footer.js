@@ -10,6 +10,9 @@ const Footer = () => {
                     <TwitterOutlined style={styles.icon} />
                     <FacebookOutlined style={styles.icon} />
                 </div>
+            </div>
+            <br/>
+            <div>
                 <p style={styles.footerText}>© 2023 Access Nova Scotia. All rights reserved.</p>
             </div>
         </footer>
@@ -40,7 +43,7 @@ const styles = {
     },
     footerText: {
         color: 'rgb(0, 107, 182)',
-        fontSize: '14px',
+        fontSize: '18px',
         margin: 0, // Remove any default margin
     },
 };

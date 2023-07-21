@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Card, Row, Col, Button, Table } from 'antd';
-import { CalendarTwoTone, MailTwoTone, EnvironmentTwoTone } from '@ant-design/icons';
+import { CalendarTwoTone, MailTwoTone, EnvironmentTwoTone, RightCircleTwoTone } from '@ant-design/icons';
 import '../Dashboard/dashboard.css'
 const { Title } = Typography;
 
-const MyComponent = () => {
+const Dashboard = () => {
 
   const cardContainerStyle = {
     justifyContent: 'center',
@@ -23,7 +23,7 @@ const MyComponent = () => {
     fontFamily: 'open_sansregular,Helvetica,Arial,Tahoma,sans-serif',
     fontSize: '18px',
     fontWeight: 600,
-    paddingTop: '7%'
+    paddingTop: '6%'
   };
 
   const innerCardStyle = {
@@ -50,6 +50,16 @@ const MyComponent = () => {
     borderRadius: '4px',
     fontSize: '16px',
     fontWeight: 'bold',
+  };
+
+  const bookButtonStyle = {
+    backgroundColor: 'green',
+    color: 'white',
+    border: 'none',
+    borderRadius: '4px',
+    fontSize: '18px',
+    fontWeight: 'bold',
+    textAlign: 'center'
   };
 
   const customstyleAppointment = {
@@ -95,6 +105,10 @@ const MyComponent = () => {
     fontWeight: 400,
   };
 
+  const iconStyle = {
+    color: 'white',
+  };
+
 
   const dataSource = [
     { key: '1', name: 'Khushi Hirenbhai Shah', license: 'SHAHK1234', receipt: 'MAY202312345896', class: 'Class 5 - Single Vehicle or Combination' },
@@ -112,6 +126,14 @@ const MyComponent = () => {
     border: '1px groove ', 
   };
 
+  const [testBooked, setTestBooked] = useState(null);
+
+  useEffect(() => {
+    setTestBooked(localStorage.getItem("testbooked"))
+  }, [])
+
+
+
   return (
     <>
         <Card style = {cardContainerStyle}>
@@ -121,7 +143,8 @@ const MyComponent = () => {
             </Card>
                 <Row style = {{ marginTop: '15px'}}gutter={[16, 16]}>
                     <Col span={16}>
-                        <div className="horizontal-scroll" style={{ height: '350px', paddingLeft: '10px' }}>
+                        {testBooked === 'true' &&
+                        <div className= "horizontal-scroll" style = {{height: "350px", paddingLeft: "15px"}}>
                             <div style = {{fontSize: '17px'}}> You need to pay for a road test (driving test) before you can schedule and take the test. Keep a copy of the road test receipt (you need this as proof that you paid for the test). </div>
                             <br/>
                             <Title style = {{fontSize: '20px'}}>Make sure you have below for online Road Test Booking:</Title>
@@ -137,6 +160,25 @@ const MyComponent = () => {
                             <Title style = {{fontSize: '20px'}}>Cancelling and rescheduling: </Title>
                             <div style = {{fontSize: '17px'}}> If you need to change your appointment, follow this link.</div>                     
                         </div>
+                        }
+                        {testBooked === 'false' &&
+                        <div className="scroll-height">
+                            <div style = {{fontSize: '17px'}}> You need to pay for a road test (driving test) before you can schedule and take the test. Keep a copy of the road test receipt (you need this as proof that you paid for the test). </div>
+                            <br/>
+                            <Title style = {{fontSize: '20px'}}>Make sure you have below for online Road Test Booking:</Title>
+                            <ul className = "ullist" style = {{fontSize: '17px'}}>
+                                <li>know the type of road test you want to take</li>
+                                <li>have your driver’s licence number (you can find this on the front of your driver’s licence)</li>
+                                <li>know your receipt number</li>
+                                <li>know your email address or cell phone number to get instructions, reminders and notifications about your appointment</li>
+                            </ul>    
+                            <Title style = {{fontSize: '20px'}}>After booking: </Title>
+                            <div style = {{fontSize: '17px'}}> After you book an appointment, you receive a confirmation email with your confirmation number, location details and the date and time of your appointment. You also receive a reminder the day before your appointment. </div>
+                            <br/>
+                            <Title style = {{fontSize: '20px'}}>Cancelling and rescheduling: </Title>
+                            <div style = {{fontSize: '17px'}}> If you need to change your appointment, follow this link.</div>                     
+                        </div>
+                        }
                     </Col>
                     <Col span={8}>
                         <div style={{ height: '100px', background: '#f1f1f0', textAlign: 'center', borderRadius: '4px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}>
@@ -145,7 +187,17 @@ const MyComponent = () => {
                         </div>
                     </Col>
                 </Row>
-            
+
+            {testBooked === 'false' && 
+            <div>
+                <br/>
+                <Title style = {{fontSize: '20px'}}>Make your appointment here: </Title>
+                <Button size = "medium" style={bookButtonStyle}>Book here <RightCircleTwoTone twoToneColor={['white', 'black']} /></Button>
+                <br/>
+            </div>  
+            }
+
+            {testBooked === 'true' &&
             <Card style = {appointmentCard}>
                 <Row>
                     <Col span= {20}> 
@@ -172,11 +224,12 @@ const MyComponent = () => {
                     style={tableStyle}
                     pagination={false}
                 />            
-            </Card>
+            </Card>     
+            }
         </Card>
         
       </>
   );
 };
 
-export default MyComponent;
+export default Dashboard;
