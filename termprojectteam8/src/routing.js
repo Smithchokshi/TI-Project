@@ -1,10 +1,10 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, useNavigate, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
-import Appointment from "./Component/Appointment/appointment";
 
 const Login = lazy(() => import('./Component/Login/login'));
 const Register = lazy(() => import('./Component/Register/register'));
+const Appointment = lazy(() => import('./Component/Appointment/appointment'));
 
 const Routing = () => {
   const isAuthenticated = localStorage.getItem('isAuthenticated');
@@ -25,16 +25,21 @@ const Routing = () => {
     },
   ].filter(cur => cur);
 
-  const PrivateRoutes = [].filter(cur => cur);
+  const PrivateRoutes = [
+    {
+      path: '/admin/appointments',
+      component: <Appointment />,
+    },
+  ].filter(cur => cur);
 
   const PrivateRoute = ({ children }) => {
-    if (!isAuthenticated) navigate('/login', { replace: true });
-    return isAuthenticated === 'false' ? children : <Login />;
+    if (isAuthenticated === 'false') navigate('/login', { replace: true });
+    return isAuthenticated === 'true' ? children : <Login />;
   };
 
   const PublicRoute = ({ children }) => {
-    // if(isAuthenticated) navigate('/products', {replace: true})
-    return isAuthenticated === 'true' ? <>Private</> : children;
+    if (isAuthenticated === 'true') navigate('/admin/appointments', { replace: true });
+    return isAuthenticated === 'true' ? <Appointment /> : children;
   };
 
   return (

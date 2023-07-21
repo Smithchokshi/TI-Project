@@ -74,6 +74,7 @@ const Register = () => {
               username: fields.username,
               fullName: fields.fullName,
               driverLicenseNumber: fields.driverLicenseNumber,
+              password: fields.password,
             },
           ];
 
@@ -96,6 +97,7 @@ const Register = () => {
             username: fields.username,
             fullName: fields.fullName,
             driverLicenseNumber: fields.driverLicenseNumber,
+            password: fields.password,
           });
 
           localStorage.setItem('userData', JSON.stringify(userData));

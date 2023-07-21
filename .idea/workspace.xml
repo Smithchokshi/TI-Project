@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab6006c7-8927-4d2d-8886-8ec7ad57888f" name="Changes" comment="">
+    <list default="true" id="a55ac889-f84a-4028-81a7-e3e63346c174" name="Changes" comment="files added">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/termprojectteam8/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/termprojectteam8/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/termprojectteam8/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/termprojectteam8/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/Component/Login/login.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/termprojectteam8/src/Component/Login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/termprojectteam8/src/Component/Login/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/Component/Register/register.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/termprojectteam8/src/Component/Register/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/termprojectteam8/src/Component/Register/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/termprojectteam8/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/termprojectteam8/src/routing.js" beforeDir="false" afterPath="$PROJECT_DIR$/termprojectteam8/src/routing.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,23 +33,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/smith/OneDrive/Desktop/TI_Project/team8_csci5193/termprojectteam8/src",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\smith\\OneDrive\\Desktop\\TI_Project\\team8_csci5193\\termprojectteam8\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/smith/OneDrive/Desktop/TI_Project/team8_csci5193/termprojectteam8/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\smith\\OneDrive\\Desktop\\TI_Project\\team8_csci5193\\termprojectteam8\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\smith\OneDrive\Desktop\TI_Project\team8_csci5193\termprojectteam8\src" />
@@ -79,6 +74,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="files added" />
+    <option name="LAST_COMMIT_MESSAGE" value="files added" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
