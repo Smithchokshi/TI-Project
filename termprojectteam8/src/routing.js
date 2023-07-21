@@ -3,6 +3,7 @@ import { Route, useNavigate, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
 import HeaderWithImage from "./Component/Header/header";
 import Footer from "./Component/Footer/footer"
+import DrivingTestForm from './Component/Admin/admin';
 
 const Login = lazy(() => import('./Component/Login/login'));
 const Register = lazy(() => import('./Component/Register/register'));
@@ -40,6 +41,10 @@ const Routing = () => {
       path: '/dashboard',
       component: <Dashboard />,
     },
+    {
+      path: '/admin',
+      component: <DrivingTestForm />,
+    }
   ].filter(cur => cur);
 
   const PrivateRoute = ({ children }) => {
