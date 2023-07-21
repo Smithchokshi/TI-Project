@@ -4,54 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fcc1307-f452-4e48-9828-fb4301fd7714" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vscode/extensions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vscode/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vscode/tasks.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/browserslist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/directives/for.directive.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/directives/red.directive.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/footer/footer.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/footer/footer.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/footer/footer.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/header/header-data.model.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/header/header.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/header/header.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/header/header.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/header/header.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/nav/nav.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/nav/nav.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/nav/nav.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/views/book-appointment/book-appointment.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/views/book-appointment/book-appointment.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/views/book-appointment/book-appointment.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/views/home/home.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/views/home/home.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/views/home/home.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/image1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/image3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/imge2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/imge4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/main.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/polyfills.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/tsconfig.app.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/tsconfig.json" beforeDir="false" />
+    <list default="true" id="ab6006c7-8927-4d2d-8886-8ec7ad57888f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/termprojectteam8/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/termprojectteam8/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/termprojectteam8/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/termprojectteam8/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/Component/Login/login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/Component/Login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/termprojectteam8/src/Component/Login/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/Component/Register/register.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/Component/Register/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/termprojectteam8/src/Component/Register/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/termprojectteam8/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/termprojectteam8/src/routing.js" beforeDir="false" afterPath="$PROJECT_DIR$/termprojectteam8/src/routing.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,12 +23,17 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2Qy02P640a1f9YF16qNPMwTYQLy" />
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/termprojectteam8/package.json" />
+  </component>
+  <component name="ProjectId" id="2SqjZVtbjsLD0rsvDTvHAAHv6NH" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -74,31 +42,46 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "deep__927060",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/smith/OneDrive/Desktop/TI_Project/team8_csci5193/termprojectteam8/src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.fileTypes"
+    "nodejs_package_manager_path": "yarn",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\smith\\OneDrive\\Desktop\\TI_Project\\team8_csci5193\\termprojectteam8\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\smith\OneDrive\Desktop\TI_Project\team8_csci5193\termprojectteam8\src" />
+      <recent name="C:\Users\smith\OneDrive\Desktop\TI_Project\team8_csci5193\termprojectteam8" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\smith\OneDrive\Desktop\TI_Project\team8_csci5193\termprojectteam8\src" />
+      <recent name="C:\Users\smith\OneDrive\Desktop\TI_Project\team8_csci5193\termprojectteam8\src\Assets" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0fcc1307-f452-4e48-9828-fb4301fd7714" name="Changes" comment="" />
-      <created>1686310305853</created>
+      <changelist id="ab6006c7-8927-4d2d-8886-8ec7ad57888f" name="Changes" comment="" />
+      <created>1689881061367</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1686310305853</updated>
+      <updated>1689881061367</updated>
+      <workItem from="1689881063096" duration="17869000" />
     </task>
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
