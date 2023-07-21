@@ -4,6 +4,8 @@ import { Layout } from 'antd';
 
 const Login = lazy(() => import('./Component/Login/login'));
 const Register = lazy(() => import('./Component/Register/register'));
+const Dashboard = lazy(() => import('./Component/Dashboard/dashboard'));
+
 
 const { Content } = Layout;
 
@@ -22,6 +24,10 @@ const Routing = () => {
         {
             path: '/register',
             component: <Register />,
+        },
+        {
+            path: '/dashboard',
+            component: <Dashboard />,
         },
     ].filter(cur => cur);
 
