@@ -134,7 +134,7 @@ const MyComponent = () => {
                             </ul>    
                             <Title style = {{fontSize: '20px'}}>After booking: </Title>
                             <div style = {{fontSize: '17px'}}> After you book an appointment, you receive a confirmation email with your confirmation number, location details and the date and time of your appointment. You also receive a reminder the day before your appointment. </div>
-                            <Title style = {{fontSize: '20px'}}>Cancelation and rescheduling: </Title>
+                            <Title style = {{fontSize: '20px'}}>Cancelling and rescheduling: </Title>
                             <div style = {{fontSize: '17px'}}> If you need to change your appointment, follow this link.</div>                     
                         </div>
                     </Col>
