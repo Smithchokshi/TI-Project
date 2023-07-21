@@ -72,6 +72,7 @@ const Login = () => {
               message: 'Success',
               description: 'Login Successful',
             });
+            navigate('/admin/appointments');
           } else {
             notification.error({
               message: 'Error',
