@@ -1,7 +1,12 @@
 .horizontal-scroll {
     overflow: auto;
+    height: "350px" !important;
+    padding-left: '10px' !important;
 }
 
+.scroll-height {
+  height: 470px;
+}
 
 .horizontal-scroll::-webkit-scrollbar {
   width: 4px;
