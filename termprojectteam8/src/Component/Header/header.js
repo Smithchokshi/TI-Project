@@ -23,7 +23,7 @@ const Header = () => {
         <header style={styles.header}>
             {/* Second Curve (behind the current curve) */}
             <div style={styles.secondHeaderCurve}></div>
-            {/* Logo */}
+            {/* Logo  */}
             <div style={styles.logoContainer}>
                 <a href="/dashboard"> {/* Wrap the image inside anchor tag */}
                     <img src={logo} alt="Logo" style={styles.logo} />
