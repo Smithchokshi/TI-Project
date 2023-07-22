@@ -2,10 +2,17 @@ import React, { Suspense, lazy } from 'react';
 import { Route, useNavigate, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
 import HeaderWithImage from "./Component/Header/header";
+import Footer from "./Component/Footer/footer"
+import DrivingTestForm from './Component/Admin/admin';
 
 const Login = lazy(() => import('./Component/Login/login'));
 const Register = lazy(() => import('./Component/Register/register'));
 const Appointment = lazy(() => import('./Component/Appointment/appointment'));
+const Dashboard = lazy(() => import('./Component/Dashboard/dashboard'));
+
+
+const { Content } = Layout;
+
 const Routing = () => {
   const isAuthenticated = localStorage.getItem('isAuthenticated');
   console.log(isAuthenticated);
@@ -30,6 +37,14 @@ const Routing = () => {
       path: '/appointments',
       component: <Appointment />,
     },
+    {
+      path: '/dashboard',
+      component: <Dashboard />,
+    },
+    {
+      path: '/admin',
+      component: <DrivingTestForm />,
+    }
   ].filter(cur => cur);
 
   const PrivateRoute = ({ children }) => {
@@ -64,6 +79,7 @@ const Routing = () => {
             />
           ))}
         </Routes>
+        {isAuthenticated && isAuthenticated === 'true' && <Footer />}
       </Layout>
     </Suspense>
   );

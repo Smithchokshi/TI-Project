@@ -29,13 +29,13 @@
 //   --theme-color: #25b28f   ;
 }
 
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  list-style: none;
-  outline: 0;
-}
+// * {
+//   -webkit-box-sizing: border-box;
+//   -moz-box-sizing: border-box;
+//   box-sizing: border-box;
+//   list-style: none;
+//   outline: 0;
+// }
 
 body {
   font-family: var(--site-font-family) !important;
@@ -214,12 +214,12 @@ strong {
   font-family: 'GraphikSemibold';
 }
 
-ul {
-  float: left;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
+// ul {
+//   float: left;
+//   width: 100%;
+//   margin: 0;
+//   padding: 0;
+// }
 
 form fieldset {
   max-width: 100% !important;
