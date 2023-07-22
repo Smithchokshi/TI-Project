@@ -5,6 +5,7 @@
 }
 
 .card-content-center {
+    margin: 12px 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,13 +13,11 @@
     z-index: 1;
 }
 
-.watermark {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    pointer-events: none;
-    z-index: 99;
+.custom-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
+
 
 .custom-card {
     width: 75%;
@@ -28,17 +27,20 @@
     border-left: 5px solid rgb(0 88 164);
 }
 
-.form-container{
+.form-container-dk{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.form-container .ant-form-item {
-    margin-bottom: 25px; /* Adjust the vertical spacing between form items */
+.form-container-dk .ant-form-item {
+    /*margin-bottom: 24px; !* Adjust the vertical spacing between form items *!*/
 }
 
 .receiptno {
+    background-color: transparent !important;
     width: 200px;
+    opacity: 1;
+
 }
 
 .center {
@@ -55,32 +57,44 @@
 
 .datePicker {
     /*width: 200px;*/
-    margin-bottom: 24px;
+
+    /*margin-bottom: 12px;*/
     /*text-align: right;*/
 }
 
 .calendar {
     justify-content: center;
-    padding: 24px;
+    padding: 12px 24px;
 }
 
 .slots{
-    padding: 24px;
+    padding: 12px 24px;
     justify-content: center;
 }
 
 .slot {
     cursor: pointer;
+    /*padding: 12px !important;*/
+    margin: 12px 0px !important;
+}
+
+.slot:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .button {
     width: 30%;
-    background-color: rgb(64 131 52);
+    background-color: rgb(97 166 84);
     /* Remove the align-items property */
+}
+
+.button:hover {
+    background-color: rgb(64 131 52) !important;
 }
 
 .ant-select-selection-placeholder {
     text-align: center;
+    padding-bottom: 60px;
 }
 
 
@@ -90,4 +104,38 @@
 
 .ant-card-head-title {
     text-align: center;
+}
+
+.divider {
+    margin: 8px 0 !important;
+}
+
+.fadein {
+    animation: fade-in 1s forwards;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fadeaway {
+    animation: fade-out 1s forwards;
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
 }
