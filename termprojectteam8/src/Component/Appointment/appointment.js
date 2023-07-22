@@ -83,7 +83,7 @@ const Appointment = () => {
     <>
       <Layout className="card-content-center backgroundImage">
         <Card title="Please enter the details" className="custom-card">
-          <Form {...layout} onFinish={onFinish} className="form-container">
+          <Form {...layout} onFinish={onFinish} className="form-container-dk">
             {showReceiptNo && (
             <Form.Item className={showLocation?"fadeaway":"fadein"} name="ReceiptNo" label="Receipt No.">
               <Input addonAfter={<EnterOutlined onClick={handleReceiptNoChange}/>} className="receiptno"  />
