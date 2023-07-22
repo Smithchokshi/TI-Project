@@ -4,28 +4,29 @@ import {
   Calendar,
   Card,
   Col,
-  DatePicker,
+
   Divider,
   Form,
-  Grid,
+
   Input,
   Layout,
   List,
   Row,
   Select,
-  TimePicker,
+
 } from 'antd';
-import ArrowRightOutlined from '@ant-design/icons';
-import dayjs from 'dayjs';
+import ArrowRightOutlined, {EnterOutlined} from '@ant-design/icons';
+
 import './appointment.css';
-import logo from '../../Assets/logo.svg';
-// import customParseFormat from 'dayjs/plugin/customParseFormat';
+
 
 const { Option } = Select;
 
 const Appointment = () => {
+  const [showReceiptNo, setShowReceiptNo] = useState(true);
   const [showLocation, setShowLocation] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showBook, setShowBook] = useState(false);
   // dayjs.extend(customParseFormat);
   const range = (start, end) => {
     const result = [];
@@ -39,6 +40,7 @@ const Appointment = () => {
     const receiptNo = event.target.value;
     setShowLocation(receiptNo !== '');
     setShowDatePicker(false);
+    setShowReceiptNo(false);
   };
 
   const handleLocationChange = value => {
@@ -48,9 +50,9 @@ const Appointment = () => {
   // const disabledDates = localStorage.getItem("appointmentDates");
   const disabledDates = ['2023-07-25', '2023-07-26', '2023-07-27', '2023-07-28', '2023-07-29'];
   const slots = [
-    { time: '09:00 AM', status: 'Available' },
-    { time: '10:00 AM', status: 'Booked' },
-    { time: '11:00 AM', status: 'Available' },
+    { time: '09:00', status: 'Available' },
+    { time: '10:00', status: 'Booked' },
+    { time: '11:00', status: 'Available' },
     // Add more slot data as needed
   ];
 
@@ -71,7 +73,8 @@ const Appointment = () => {
   };
 
   const onSlotSelect = e => {
-    console.log(e.target.innerText);
+    setShowBook(true);
+    console.log(e);
   };
 
   const onFinish = () => {};
@@ -81,11 +84,13 @@ const Appointment = () => {
       <Layout className="card-content-center backgroundImage">
         <Card title="Please enter the details" className="custom-card">
           <Form {...layout} onFinish={onFinish} className="form-container">
-            <Form.Item name="ReceiptNo" label="Receipt No.">
-              <Input className="receiptno" onChange={handleReceiptNoChange} />
+            {showReceiptNo && (
+            <Form.Item className={showLocation?"fadeaway":"fadein"} name="ReceiptNo" label="Receipt No.">
+              <Input addonAfter={<EnterOutlined onClick={handleReceiptNoChange}/>} className="receiptno"  />
             </Form.Item>
+            )}
             {showLocation && (
-              <Form.Item name="location" label="Location">
+              <Form.Item className={showLocation?"fadein":"fadeaway"} name="location" label="Location">
                 <Select
                   className="select"
                   placeholder="Select a location"
@@ -99,9 +104,11 @@ const Appointment = () => {
                 </Select>
               </Form.Item>
             )}
-            <Divider />
+
             {showDatePicker && (
-              <Row className="gutter-row datePicker" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                <div>
+                {/*<Divider />*/}
+              <Row className={`gutter-row datePicker ${showDatePicker?"fadein":"fadeaway"}`} gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                 <Col className="calendar" span={12}>
                   Select Date:
                   {/*<Form.Item name="slot">*/}
@@ -134,11 +141,14 @@ const Appointment = () => {
                   />
                 </Col>
               </Row>
+                </div>
             )}
+            {showBook && (
             <Button className="button" type="primary">
               <ArrowRightOutlined />
               Book
             </Button>
+            )}
           </Form>
         </Card>
       </Layout>
