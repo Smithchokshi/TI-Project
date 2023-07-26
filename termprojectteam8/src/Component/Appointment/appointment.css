@@ -70,17 +70,19 @@
 .slots{
     padding: 12px 24px;
     justify-content: center;
+    height: 70%;
 }
 
 .slot {
     cursor: pointer;
+    flex: 1;
     /*padding: 12px !important;*/
     margin: 12px 0px !important;
 }
 
-.slot:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+/*.slot:hover {*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*}*/
 
 .button {
     width: 30%;
@@ -94,7 +96,7 @@
 
 .ant-select-selection-placeholder {
     text-align: center;
-    padding-bottom: 60px;
+    /*padding-bottom: 60px;*/
 }
 
 
@@ -108,6 +110,12 @@
 
 .divider {
     margin: 8px 0 !important;
+}
+
+.selectedSlot {
+    /*top: ;*/
+    margin: 30%;
+    align-content: center;
 }
 
 .fadein {
