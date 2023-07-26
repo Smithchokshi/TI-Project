@@ -53,8 +53,8 @@ const Routing = () => {
   };
 
   const PublicRoute = ({ children }) => {
-    if (isAuthenticated === 'true') navigate('/admin/appointments', { replace: true });
-    return isAuthenticated === 'true' ? <Appointment /> : children;
+    if (isAuthenticated === 'true') navigate('/dashboard', { replace: true });
+    return isAuthenticated === 'true' ? <Dashboard /> : children;
   };
 
   return (

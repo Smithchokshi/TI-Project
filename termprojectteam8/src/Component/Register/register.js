@@ -25,6 +25,7 @@ const initialState = {
   username: '',
   password: '',
   driverLicenseNumber: '',
+  address: '',
   confirmPassword: '',
 };
 
@@ -75,6 +76,7 @@ const Register = () => {
               fullName: fields.fullName,
               driverLicenseNumber: fields.driverLicenseNumber,
               password: fields.password,
+              address: fields.address
             },
           ];
 
@@ -98,6 +100,7 @@ const Register = () => {
             fullName: fields.fullName,
             driverLicenseNumber: fields.driverLicenseNumber,
             password: fields.password,
+            address: fields.address
           });
 
           localStorage.setItem('userData', JSON.stringify(userData));
@@ -217,6 +220,19 @@ const Register = () => {
                       className={errors?.username ? 'invalid' : ''}
                     />
                     {validator.message('Email', fields?.username, `required|email`)}
+                  </div>
+
+                  {/* Address */}
+                  <div className="full-width form-field">
+                    <div className="label">Address</div>
+                    <Input
+                        type="text"
+                        value={fields?.address}
+                        onChange={e => handleChange('address', e)}
+                        placeholder="Email"
+                        className={errors?.address ? 'invalid' : ''}
+                    />
+                    {validator.message('Address', fields?.address, `required`)}
                   </div>
 
                   {/* password */}
