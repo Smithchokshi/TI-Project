@@ -1,16 +1,19 @@
 /* appointment.css */
 
 .backgroundImage {
-    -webkit-background-image: image('../../Assets/logo.svg');
+    /*-webkit-background-image: image('../../Assets/logo.svg');*/
+    height: 100%;
+    width: 100%;
 }
 
 .card-content-center {
+    background-color: white;
     margin: 12px 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 1;
+    z-index: 999;
 }
 
 .custom-card:hover {
