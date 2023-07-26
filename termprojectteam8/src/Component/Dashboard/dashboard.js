@@ -153,7 +153,6 @@ const Dashboard = () => {
     const locations = JSON.parse(localStorage.getItem('locations')); 
     const place = userData[0].testLocation
 
-        // Find the value corresponding to the matched key
     let foundValue;
     for (const key in locations) {
       if (key === place) {
@@ -213,9 +212,6 @@ const Dashboard = () => {
                 </ul>
                 <Title style={{ fontSize: '20px' }}>After booking: </Title>
                 <div style={{ fontSize: '17px' }}> After you book an appointment, you receive a confirmation email with your confirmation number, location details and the date and time of your appointment. You also receive a reminder the day before your appointment. </div>
-                <br />
-                <Title style={{ fontSize: '20px' }}>Cancelling and rescheduling: </Title>
-                <div style={{ fontSize: '17px' }}> If you need to change your appointment, follow this link.</div>
               </div>
             }
           </Col>
@@ -229,7 +225,6 @@ const Dashboard = () => {
 
         {testBooked === 'false' &&
           <div>
-            <br />
             <Title style={{ fontSize: '20px' }}>Make your appointment here: </Title>
             <Button size="medium" style={bookButtonStyle} onClick={handleButtonClick}>Book here <RightCircleTwoTone twoToneColor={['white', 'black']} /></Button>
             <br />
