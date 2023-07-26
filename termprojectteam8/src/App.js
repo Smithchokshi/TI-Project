@@ -5,6 +5,12 @@ import Routing from './routing';
 const App = () => {
   useEffect(() => {
     const testBooked = localStorage.getItem('testBooked')
+    const isAuthenticated = localStorage.getItem('isAuthenticated');
+
+    if(isAuthenticated === null) {
+      localStorage.setItem('isAuthenticated', false);
+    }
+
     if (testBooked === null) {
       localStorage.setItem('testBooked', false)
     }    
