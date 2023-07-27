@@ -229,7 +229,7 @@ const Register = () => {
                         type="text"
                         value={fields?.address}
                         onChange={e => handleChange('address', e)}
-                        placeholder="Email"
+                        placeholder="Address"
                         className={errors?.address ? 'invalid' : ''}
                     />
                     {validator.message('Address', fields?.address, `required`)}
