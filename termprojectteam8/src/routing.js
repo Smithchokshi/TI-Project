@@ -9,6 +9,8 @@ const Login = lazy(() => import('./Component/Login/login'));
 const Register = lazy(() => import('./Component/Register/register'));
 const Appointment = lazy(() => import('./Component/Appointment/appointment'));
 const Dashboard = lazy(() => import('./Component/Dashboard/dashboard'));
+const PageNotFound = lazy(() => import('./Component/404/404'));
+
 
 const { Content } = Layout;
 
@@ -44,6 +46,10 @@ const Routing = () => {
       path: '/admin',
       component: <DrivingTestForm />,
     },
+    {
+      path: '*',
+      component: <PageNotFound />,
+    }
   ].filter(cur => cur);
 
   const PrivateRoute = ({ children }) => {
