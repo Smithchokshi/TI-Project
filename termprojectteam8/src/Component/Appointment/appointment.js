@@ -107,6 +107,7 @@ const Appointment = () => {
       localStorage.setItem('userData', JSON.stringify([user]));
       availableSlots.filter(item => item !== user.testDate);
       localStorage.setItem('testBooked', true);
+      const locations = JSON.parse(localStorage.getItem('locations'));
       const response = await fetch(
         'https://nek3owgq6i.execute-api.us-east-1.amazonaws.com/1/book',
         {
@@ -116,14 +117,13 @@ const Appointment = () => {
           },
           body: JSON.stringify({
             email: user.username,
-            testLocation: user.testLocation,
+            testLocation: locations[user.testLocation],
             testDate: selectedSlot,
             name: user.fullName,
           }),
         }
       );
       if (response.ok) {
-        const locations = JSON.parse(localStorage.getItem('locations'));
         const place = user.testLocation;
         notification.success({
           message: 'Appointment Booked!',
