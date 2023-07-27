@@ -222,7 +222,7 @@ const Appointment = () => {
                       defaultValue={null}
                       disabledDate={disabledDate}
                       fullscreen={false}
-                      onSelect={onDateChange
+                      onSelect={onDateChange}
                     />
                   </Col>
                   <Col span={12}>
