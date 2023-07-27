@@ -19,23 +19,38 @@ const DrivingTestForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+  
     if (date && time) {
       const dateTimeString = `${date} ${time}`;
-
+  
       // Check if the date and time already exist in the availableDates array
       if (availableDates.includes(dateTimeString)) {
-        alert('This date and time slot already exist.');
+        alert('This date and time slot already exists.');
         return;
       }
+      const currentDate = new Date().toISOString().split('T')[0];
 
+      // Compare the selected date with the current date
+      if (date < currentDate) {
+        alert('Please select a date on or after the current date.');
+        return; // Don't update the date state if it's before the current date
+      }
+  
+      // Update the state first, then update the local storage
       setAvailableDates([...availableDates, dateTimeString]);
+  
+      // Clear the input fields after adding the new date
       setDate('');
       setTime('');
-      console.log(availableDates)
-      localStorage.setItem('availableSlots', JSON.stringify(availableDates))
+  
+      // Log the updated state (optional)
+      console.log(availableDates);
+  
+      // Update the local storage with the updated availableDates array
+      localStorage.setItem('availableSlots', JSON.stringify([...availableDates, dateTimeString]));
     }
   };
+  
 
   return (
     <div className="form-container">
