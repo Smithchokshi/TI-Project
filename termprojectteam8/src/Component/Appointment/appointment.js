@@ -1,5 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Calendar, Card, Col, Form, Input, Layout, List, Row, Select } from 'antd';
+import {
+  Button,
+  Calendar,
+  Card,
+  Col,
+  Form,
+  Input,
+  Layout,
+  List,
+  notification,
+  Row,
+  Select,
+} from 'antd';
 import ArrowRightOutlined, { EnterOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import './appointment.css';
@@ -89,15 +101,43 @@ const Appointment = () => {
     // console.log(e);
   };
 
-  const onFinish = e => {
-    localStorage.setItem('userData', JSON.stringify([user]));
-    availableSlots.filter(item => item !== user.testDate);
-    localStorage.setItem('testBooked', true);
-    // fetch()
-    //   .then()
-    //   .catch(err => console.log(err));
-    // console.log(user);
-    // navigate('/dashboard');
+  const onFinish = async e => {
+    try {
+      localStorage.setItem('userData', JSON.stringify([user]));
+      availableSlots.filter(item => item !== user.testDate);
+      localStorage.setItem('testBooked', true);
+      const response = await fetch(
+        'https://nek3owgq6i.execute-api.us-east-1.amazonaws.com/1/book',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: user.username,
+            testLocation: user.testLocation,
+            testDate: user.testDate,
+            name: user.fullName,
+          }),
+        }
+      );
+      if (response.ok) {
+        notification.success({
+          message: 'Appointment Booked!',
+          description:
+            'Appointment has been booked and confirmation email has been sent to your registered email!',
+        });
+      }
+      if (!response.ok) {
+        notification.error({
+          message: 'Error',
+          description: 'Some error occurred. Please try booking again.',
+        });
+      }
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Error occurred during fetch: ', error);
+    }
   };
 
   useEffect(() => {
