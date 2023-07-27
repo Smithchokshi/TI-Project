@@ -9,11 +9,28 @@ const DrivingTestForm = () => {
     setDate(event.target.value);
   };
 
+  // const handleTimeChange = (event) => {
+  //   const selectedTime = event.target.value;
+  //   // Round minutes to the nearest multiple of 30
+  //   const roundedMinutes = Math.round(parseInt(selectedTime.split(':')[1]) / 30) * 30;
+  //   const formattedTime = `${selectedTime.split(':')[0].padStart(2, '0')}:${roundedMinutes.toString().padStart(2, '0')}`;
+  //   setTime(formattedTime);
+  // };
+
   const handleTimeChange = (event) => {
     const selectedTime = event.target.value;
-    // Round minutes to the nearest multiple of 30
-    const roundedMinutes = Math.round(parseInt(selectedTime.split(':')[1]) / 30) * 30;
-    const formattedTime = `${selectedTime.split(':')[0].padStart(2, '0')}:${roundedMinutes.toString().padStart(2, '0')}`;
+    let [hours, minutes] = selectedTime.split(':').map((part) => parseInt(part));
+  
+    if (minutes >= 30) {
+      hours += 1; // Increase the hour when minutes are 60 or more
+      minutes = 0; // Set minutes to 0
+    } else {
+      // Round minutes to the nearest multiple of 30
+      minutes = Math.round(minutes / 30) * 30;
+    }
+  
+    // Format the time as 'HH:mm'
+    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
     setTime(formattedTime);
   };
 
