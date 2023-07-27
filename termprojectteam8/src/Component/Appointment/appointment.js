@@ -1,5 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Calendar, Card, Col, Form, Input, Layout, List, Row, Select } from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  Button,
+  Calendar,
+  Card,
+  Col,
+  Form,
+  Input,
+  Layout,
+  List,
+  notification,
+  Row,
+  Select,
+} from 'antd';
 import ArrowRightOutlined, { EnterOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import './appointment.css';
@@ -7,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 
 const { Option } = Select;
 const Appointment = () => {
+  const inputRef = useRef(null);
   const navigate = useNavigate();
 
   const [showReceiptNo, setShowReceiptNo] = useState(true);
@@ -32,12 +45,13 @@ const Appointment = () => {
     return result;
   };
 
-  const handleReceiptNoChange = event => {
+  const handleReceiptNoChange = () => {
     setUser(prevUser => ({
       ...prevUser,
-      receiptNumber: event.target.value,
+      receiptNumber: inputRef.current?.input.value,
     }));
-    const receiptNo = event.target.value;
+    const receiptNo = inputRef.current?.input.value;
+    console.log(inputRef.current?.input.value);
     setShowLocation(receiptNo !== '');
     setShowDatePicker(false);
     setShowReceiptNo(false);
@@ -80,18 +94,50 @@ const Appointment = () => {
         dayjs(time, 'HH:mm').format('h:mm a')
     );
     setSlot(prevState => ({ ...prevState, time: e.target.textContent }));
+    setUser(prevUser => ({
+      ...prevUser,
+      testDate: date + ' ' + time,
+    }));
     // console.log(e);
   };
 
-  const onFinish = e => {
-    const userData = localStorage.getItem('userData');
-    const appointment = slot.date + ' ' + slot.time;
-    setUser(prevUser => ({ ...prevUser, testDate: appointment }));
-    localStorage.setItem('userData', userData);
-    availableSlots.filter(item => item !== userData.appointment);
-    // localStorage.setItem('availableSlots', availableSlots);
-    localStorage.setItem('testBooked', true);
-    navigate('/dashboard');
+  const onFinish = async e => {
+    try {
+      localStorage.setItem('userData', JSON.stringify([user]));
+      availableSlots.filter(item => item !== user.testDate);
+      localStorage.setItem('testBooked', true);
+      const response = await fetch(
+        'https://nek3owgq6i.execute-api.us-east-1.amazonaws.com/1/book',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: user.username,
+            testLocation: user.testLocation,
+            testDate: user.testDate,
+            name: user.fullName,
+          }),
+        }
+      );
+      if (response.ok) {
+        notification.success({
+          message: 'Appointment Booked!',
+          description:
+            'Appointment has been booked and confirmation email has been sent to your registered email!',
+        });
+      }
+      if (!response.ok) {
+        notification.error({
+          message: 'Error',
+          description: 'Some error occurred. Please try booking again.',
+        });
+      }
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Error occurred during fetch: ', error);
+    }
   };
 
   useEffect(() => {
@@ -123,6 +169,7 @@ const Appointment = () => {
                 <Input
                   addonAfter={<EnterOutlined onClick={handleReceiptNoChange} />}
                   className="receiptno"
+                  ref={inputRef}
                 />
               </Form.Item>
             )}
@@ -184,7 +231,7 @@ const Appointment = () => {
               </div>
             )}
             {showBook && (
-              <Button className="button" type="primary">
+              <Button className="button" type="primary" htmlType="submit">
                 <ArrowRightOutlined />
                 Book
               </Button>
