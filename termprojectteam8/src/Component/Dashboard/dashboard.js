@@ -3,6 +3,7 @@ import { Typography, Card, Row, Col, Button, Table, message, Popconfirm  } from 
 import { CalendarTwoTone, MailTwoTone, EnvironmentTwoTone, RightCircleTwoTone  } from '@ant-design/icons';
 import '../Dashboard/dashboard.css'
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 const { Title } = Typography;
 
@@ -111,32 +112,42 @@ const Dashboard = () => {
   const confirm = async (e) => {
     console.log(e);
     message.success('Appointment Canceled');
-    localStorage.setItem('testBooked', false)
-    setTestBooked(localStorage.getItem("testBooked"))
+    const tempData = {
+      address: loggedInUser.address,
+      driverLicenseNumber: loggedInUser.driverLicenseNumber,
+      fullName: loggedInUser.fullName,
+      isAdmin: false,
+      password: loggedInUser.password,
+      receiptNumber: null,
+      testBooked: false,
+      testDate: null,
+      testLocation: null,
+      username: loggedInUser.username
+    }
+    localStorage.setItem('loggedInUser',JSON.stringify(tempData))
+    setLoggedInUser(tempData)
+    // setTestBooked(localStorage.getItem("testBooked"))
     const response = await fetch('https://nek3owgq6i.execute-api.us-east-1.amazonaws.com/1/cancel', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: email, testLocation: testLocation, testDate: testDate, name: name } )
+        body: JSON.stringify({ email: email, testLocation: testLocation, testDate: date, name: loggedInUser?.fullName } )
       });
+
   };
   const cancel = (e) => {
   };
 
-  const [testBooked, setTestBooked] = useState(null);
-  const [testDate, setTestDate] = useState(null);
   const [testLocation, setTestLocation] = useState(null);
-  const [licenseLocation, setLicenseLocation] = useState(null);
-  const [name, setName] = useState(null);
-  const [licenseNumber, setLicenseNumber] = useState(null);
-  const [receiptNumber, setReceiptNumber] = useState(null);
   const [classNumber, setClassNumber] = useState(null);
   const [locations, setLocations] = useState(null);
   const [email, setEmail] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(JSON.parse(localStorage.getItem('loggedInUser')));
+  const date = dayjs(loggedInUser.testDate, 'YYYY-MM-DD HH:mm').format('D MMMM, YYYY h:mm a')
 
   const dataSource = [
-    { key: '1', name: name, license: licenseNumber, receipt: receiptNumber, class: classNumber },
+    { key: '1', name: loggedInUser?.fullName, license: loggedInUser?.driverLicenseNumber, receipt: loggedInUser?.receiptNumber, class: classNumber },
   ];
 
   const columns = [
@@ -145,6 +156,7 @@ const Dashboard = () => {
     { title: 'Recipt Number', dataIndex: 'receipt', key: 'receipt' },
     { title: 'Class Number', dataIndex: 'class', key: 'class' },
   ];
+
 
   const tableStyle = {
     borderRadius: '10px',
@@ -157,9 +169,8 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('userData'));
     const locations = JSON.parse(localStorage.getItem('locations')); 
-    const place = userData[0].testLocation
+    const place = loggedInUser.testLocation
 
     let foundValue;
     for (const key in locations) {
@@ -170,27 +181,22 @@ const Dashboard = () => {
       }
     }
 
-    setTestBooked(localStorage.getItem("testBooked"))
-    setTestDate(userData[0].testDate)
-    setLicenseLocation(userData[0].address)
-    setName(userData[0].fullName)
-    setLicenseNumber(userData[0].driverLicenseNumber)
-    setReceiptNumber(userData[0].receiptNumber)
     setClassNumber(localStorage.getItem('classNumber'))
     setLocations(locations)
-    setEmail(userData[0].username)
+    setEmail(loggedInUser?.username)
   }, [])
 
   return (
     <>
       <Card style={cardContainerStyle}>
         <Title > Access Nova Scotia: Online Services</Title>
+        {console.log(date)}
         <Card style={innerCardStyle}>
           <Title style={customStyle}> You can book road test appointment at Access Nova Scotia. Appointment options may vary depending on the location and services available. </Title>
         </Card>
         <Row style={{ marginTop: '15px' }} gutter={[16, 16]}>
           <Col span={16}>
-            {testBooked === 'true' &&
+            {loggedInUser?.testBooked &&
               <div className="horizontal-scroll" style={{ height: "350px", paddingLeft: "15px" }}>
                 <div style={{ fontSize: '17px' }}> You need to pay for a road test (driving test) before you can schedule and take the test. Keep a copy of the road test receipt (you need this as proof that you paid for the test). </div>
                 <br />
@@ -209,7 +215,7 @@ const Dashboard = () => {
 
               </div>
             }
-            {testBooked === 'false' &&
+            {!loggedInUser?.testBooked &&
               <div className="scroll-height">
                 <div style={{ fontSize: '17px' }}> You need to pay for a road test (driving test) before you can schedule and take the test. Keep a copy of the road test receipt (you need this as proof that you paid for the test). </div>
                 <br />
@@ -233,7 +239,7 @@ const Dashboard = () => {
           </Col>
         </Row>
 
-        {testBooked === 'false' &&
+        {!loggedInUser?.testBooked &&
           <div>
             <Title style={{ fontSize: '20px' }}>Make your appointment here: </Title>
             <Button size="medium" style={bookButtonStyle} onClick={handleButtonClick}>Book here <RightCircleTwoTone twoToneColor={['white', 'black']} /></Button>
@@ -241,7 +247,7 @@ const Dashboard = () => {
           </div>
         }
 
-        {testBooked === 'true' &&
+        {loggedInUser?.testBooked &&
           <Card style={appointmentCard}>
             <Row>
               <Col span={16}>
@@ -264,13 +270,13 @@ const Dashboard = () => {
               </Col>
             </Row>
             <Card style={examDetails}>
-              <CalendarTwoTone style={{ fontSize: '18px' }} /> <span style={customStypeRoadAppointment}>Road Test Appointment: </span> <span style={customStypeRoadAppointment1} >{testDate}</span>
+              <CalendarTwoTone style={{ fontSize: '18px' }} /> <span style={customStypeRoadAppointment}>Road Test Appointment: </span> <span style={customStypeRoadAppointment1} >{date} Atlantic Standard Time</span>
               <br />
               <br />
               <EnvironmentTwoTone style={{ fontSize: '18px' }} /> <span style={customStypeRoadAppointment}>Test Location: </span> <span style={customStypeRoadAppointment1} > {testLocation}</span>
               <br />
               <br />
-              <MailTwoTone style={{ fontSize: '18px' }} /> <span style={customStypeRoadAppointment}>License Delivery Location: </span> <span style={customStypeRoadAppointment1} >{licenseLocation}</span>
+              <MailTwoTone style={{ fontSize: '18px' }} /> <span style={customStypeRoadAppointment}>License Delivery Location: </span> <span style={customStypeRoadAppointment1} >{loggedInUser.address}</span>
 
             </Card>
             <br />

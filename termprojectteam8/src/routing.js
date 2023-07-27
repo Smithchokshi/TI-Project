@@ -68,7 +68,7 @@ const Routing = () => {
   };
 
   useEffect(() => {
-    const testBooked = localStorage.getItem('testBooked');
+    // const testBooked = localStorage.getItem('testBooked');
     const isAuthenticated = localStorage.getItem('isAuthenticated');
 
     const userData = JSON.parse(localStorage.getItem('userData'));
@@ -107,9 +107,9 @@ const Routing = () => {
       localStorage.setItem('isAuthenticated', false);
     }
 
-    if (testBooked === null) {
-      localStorage.setItem('testBooked', false);
-    }
+    // if (testBooked === null) {
+    //   localStorage.setItem('testBooked', false);
+    // }
     const classNumber = localStorage.getItem('classNumber');
     if (classNumber === null) {
       localStorage.setItem('classNumber', 'Class 5 - Single Vehicle or Combination');

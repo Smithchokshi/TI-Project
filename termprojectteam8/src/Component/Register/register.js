@@ -78,6 +78,7 @@ const Register = () => {
               password: fields.password,
               address: fields.address,
               isAdmin: false,
+              testBooked: false
             },
           ];
 
@@ -103,6 +104,7 @@ const Register = () => {
             password: fields.password,
             address: fields.address,
             isAdmin: false,
+            testBooked: false
           });
 
           localStorage.setItem('userData', JSON.stringify(userData));
