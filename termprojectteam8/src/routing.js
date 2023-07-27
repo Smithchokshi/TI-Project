@@ -11,7 +11,6 @@ const Appointment = lazy(() => import('./Component/Appointment/appointment'));
 const Dashboard = lazy(() => import('./Component/Dashboard/dashboard'));
 const PageNotFound = lazy(() => import('./Component/404/404'));
 
-
 const { Content } = Layout;
 
 const Routing = () => {
@@ -49,7 +48,7 @@ const Routing = () => {
     {
       path: '*',
       component: <PageNotFound />,
-    }
+    },
   ].filter(cur => cur);
 
   const PrivateRoute = ({ children }) => {
@@ -121,7 +120,7 @@ const Routing = () => {
 
     const user = JSON.parse(localStorage.getItem('loggedInUser'));
     if (user?.isAdmin) navigate('/admin');
-    else navigate('/dashboard');
+    else navigate(window.location.pathname);
   }, []);
 
   return (
