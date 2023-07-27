@@ -76,7 +76,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "deep__927060",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.fileTypes"
+    "prettier.import.notification.dismissed": "true",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\smith\\OneDrive\\Desktop\\TI_Project\\team8_csci5193\\termprojectteam8\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "settings.javascript.prettier"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -90,6 +92,9 @@
     </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -100,5 +105,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
