@@ -1,16 +1,22 @@
 /* appointment.css */
 
 .backgroundImage {
-    -webkit-background-image: image('../../Assets/logo.svg');
+    /*-webkit-background-image: image('../../Assets/logo.svg');*/
+    background-color: #eeeeee;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 999;
 }
 
 .card-content-center {
-    margin: 12px 12px;
+    background-color: white;
+    margin: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 1;
+    z-index: 999;
 }
 
 .custom-card:hover {
@@ -70,17 +76,19 @@
 .slots{
     padding: 12px 24px;
     justify-content: center;
+    height: 70%;
 }
 
 .slot {
     cursor: pointer;
+    flex: 1;
     /*padding: 12px !important;*/
     margin: 12px 0px !important;
 }
 
-.slot:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+/*.slot:hover {*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*}*/
 
 .button {
     width: 30%;
@@ -94,7 +102,7 @@
 
 .ant-select-selection-placeholder {
     text-align: center;
-    padding-bottom: 60px;
+    /*padding-bottom: 60px;*/
 }
 
 
@@ -108,6 +116,12 @@
 
 .divider {
     margin: 8px 0 !important;
+}
+
+.selectedSlot {
+    /*top: ;*/
+    margin: 30%;
+    align-content: center;
 }
 
 .fadein {
