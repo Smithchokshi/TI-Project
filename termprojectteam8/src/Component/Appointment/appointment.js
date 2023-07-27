@@ -28,6 +28,7 @@ const Appointment = () => {
   const [showBook, setShowBook] = useState(false);
   const [slots, setSlots] = useState();
   const [selectedSlot, setSelectedSlot] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
   const [slot, setSlot] = useState({
     location: null,
     date: null,
@@ -116,12 +117,14 @@ const Appointment = () => {
           body: JSON.stringify({
             email: user.username,
             testLocation: user.testLocation,
-            testDate: user.testDate,
+            testDate: selectedSlot,
             name: user.fullName,
           }),
         }
       );
       if (response.ok) {
+        const locations = JSON.parse(localStorage.getItem('locations'));
+        const place = user.testLocation;
         notification.success({
           message: 'Appointment Booked!',
           description:
@@ -203,6 +206,7 @@ const Appointment = () => {
                   <Col className="calendar" span={12}>
                     Select Date:
                     <Calendar
+                      value={selectedDate}
                       disabledDate={disabledDate}
                       fullscreen={false}
                       onChange={onDateChange}
