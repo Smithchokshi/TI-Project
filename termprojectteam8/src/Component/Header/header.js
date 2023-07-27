@@ -36,7 +36,13 @@ const Header = () => {
         <a href="/contact">Contact</a>
       </Menu.Item>
       <Menu.Item key="4">
-        <a href="/signout">Sign Out</a>
+        <a
+            href="/signout"
+            onClick={() => {
+                localStorage.setItem('isAuthenticated', 'false');
+                localStorage.setItem('loggedInUser', null);
+            }}
+        >Sign Out</a>
       </Menu.Item>
     </Menu>
   );
@@ -58,7 +64,7 @@ const Header = () => {
         </a>
       </div>
       <div className="headerCurve">
-        <ul className="navList">
+        <ul className={user?.isAdmin ? 'adminHeader' : "navList"}>
           {!user?.isAdmin && (
             <>
               <li className="navItem">
