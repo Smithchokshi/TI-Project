@@ -76,7 +76,8 @@ const Register = () => {
               fullName: fields.fullName,
               driverLicenseNumber: fields.driverLicenseNumber,
               password: fields.password,
-              address: fields.address
+              address: fields.address,
+              isAdmin: false,
             },
           ];
 
@@ -100,7 +101,8 @@ const Register = () => {
             fullName: fields.fullName,
             driverLicenseNumber: fields.driverLicenseNumber,
             password: fields.password,
-            address: fields.address
+            address: fields.address,
+            isAdmin: false,
           });
 
           localStorage.setItem('userData', JSON.stringify(userData));
@@ -226,11 +228,11 @@ const Register = () => {
                   <div className="full-width form-field">
                     <div className="label">Address</div>
                     <Input
-                        type="text"
-                        value={fields?.address}
-                        onChange={e => handleChange('address', e)}
-                        placeholder="Email"
-                        className={errors?.address ? 'invalid' : ''}
+                      type="text"
+                      value={fields?.address}
+                      onChange={e => handleChange('address', e)}
+                      placeholder="Address"
+                      className={errors?.address ? 'invalid' : ''}
                     />
                     {validator.message('Address', fields?.address, `required`)}
                   </div>
@@ -278,7 +280,7 @@ const Register = () => {
                       className="submit-btn full-width"
                       loading={isSubmitLoading}
                     >
-                      <span>Login</span>
+                      <span>Register</span>
                     </Button>
                   </div>
                 </FormMain>
