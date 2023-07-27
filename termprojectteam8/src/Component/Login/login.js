@@ -72,7 +72,8 @@ const Login = () => {
               message: 'Success',
               description: 'Login Successful',
             });
-            navigate('/dashboard');
+            if (user?.isAdmin) navigate('/admin');
+            else navigate('/dashboard');
           } else {
             notification.error({
               message: 'Error',
