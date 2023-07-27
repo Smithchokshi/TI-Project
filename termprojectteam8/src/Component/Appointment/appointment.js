@@ -128,6 +128,8 @@ const Appointment = () => {
         setLoading(true);
 
         availableSlots.filter(item => item !== user.testDate);
+        const tempData = user;
+        tempData.testBooked = true;
         setUser(prevState => ({
           ...prevState,
               testBooked: true
@@ -161,7 +163,7 @@ const Appointment = () => {
             }
           });
           localStorage.setItem("userData", JSON.stringify(allUsers));
-          localStorage.setItem('loggedInUser', JSON.stringify(user));
+          localStorage.setItem('loggedInUser', JSON.stringify(tempData));
           notification.success({
             message: 'Appointment Booked!',
             description:
