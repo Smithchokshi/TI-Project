@@ -146,12 +146,22 @@ const Appointment = () => {
           }
         );
         if (response.ok) {
-          const place = user.testLocation;
+          const allUsers = JSON.parse(localStorage.getItem('userData'));
+          allUsers.map((e,index) => {
+            if(e.username === user.username) {
+              e.testBooked = true;
+              e.testLocation = user.testLocation;
+              e.testDate = user.testDate;
+              e.receiptNumber = user.receiptNumber;
+            }
+          });
+          localStorage.setItem("userData", JSON.stringify(allUsers))
           notification.success({
             message: 'Appointment Booked!',
             description:
               'Appointment has been booked and confirmation email has been sent to your registered email!',
           });
+
         }
         if (!response.ok) {
           notification.error({
@@ -176,8 +186,10 @@ const Appointment = () => {
       const user = localStorage.getItem('loggedInUser');
       return user ? JSON.parse(user) : {};
     };
+
     const slotsData = getAvailableSlots();
     const userData = getUserDetails();
+
     setAvailableSlots(slotsData);
     setUser(userData);
   }, []);
