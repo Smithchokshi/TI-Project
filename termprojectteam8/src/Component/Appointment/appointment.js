@@ -11,6 +11,7 @@ import {
   notification,
   Row,
   Select,
+  Spin,
 } from 'antd';
 import ArrowRightOutlined, { EnterOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
@@ -37,6 +38,7 @@ const Appointment = () => {
   const [availableSlots, setAvailableSlots] = useState([]);
   const [availableDates, setAvailableDates] = useState([]);
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const range = (start, end) => {
     const result = [];
@@ -47,16 +49,24 @@ const Appointment = () => {
   };
 
   const handleReceiptNoChange = () => {
-    setUser(prevUser => ({
-      ...prevUser,
-      receiptNumber: inputRef.current?.input.value,
-    }));
     const receiptNo = inputRef.current?.input.value;
-    console.log(inputRef.current?.input.value);
-    setShowLocation(receiptNo !== '');
-    setShowDatePicker(false);
-    setShowReceiptNo(false);
-    setAvailableDates(Array.from(new Set(availableSlots.map(item => item.slice(0, 10)))));
+    if (receiptNo && receiptNo.length) {
+      setUser(prevUser => ({
+        ...prevUser,
+        receiptNumber: inputRef.current?.input.value,
+      }));
+
+      console.log(inputRef.current?.input.value);
+      setShowLocation(receiptNo !== '');
+      setShowDatePicker(false);
+      setShowReceiptNo(false);
+      setAvailableDates(Array.from(new Set(availableSlots.map(item => item.slice(0, 10)))));
+    } else {
+      notification.error({
+        message: 'Receipt Number required',
+        description: 'Please enter Receipt Number.',
+      });
+    }
   };
 
   const handleLocationChange = value => {
@@ -115,6 +125,7 @@ const Appointment = () => {
           description: 'Please select time slot.',
         });
       } else {
+        setLoading(true);
         localStorage.setItem('userData', JSON.stringify([user]));
         availableSlots.filter(item => item !== user.testDate);
         localStorage.setItem('testBooked', true);
@@ -148,6 +159,7 @@ const Appointment = () => {
             description: 'Some error occurred. Please try booking again.',
           });
         }
+        setLoading(false);
         navigate('/dashboard');
       }
     } catch (error) {
@@ -172,90 +184,100 @@ const Appointment = () => {
 
   return (
     <div className="backgroundImage">
-      <Layout className="card-content-center backgroundImage">
-        <Card title="Please enter the details" className="custom-card">
-          <Form {...layout} onFinish={onFinish} className="form-container-dk">
-            {showReceiptNo && (
-              <Form.Item
-                className={showLocation ? 'fadeaway' : 'fadein'}
-                name="ReceiptNo"
-                label="Receipt No."
-              >
-                <Input
-                  addonAfter={<EnterOutlined onClick={handleReceiptNoChange} />}
-                  className="receiptno"
-                  ref={inputRef}
-                />
-              </Form.Item>
-            )}
-            {showLocation && (
-              <Form.Item
-                className={showLocation ? 'fadein' : 'fadeaway'}
-                name="location"
-                label="Location"
-              >
-                <Select
-                  className="select"
-                  placeholder="Select a location"
-                  style={{ width: 200 }}
-                  onChange={handleLocationChange}
+      {loading ? (
+        <Spin className="card-content-center spin" tip="Loading..." />
+      ) : (
+        <Layout className="card-content-center backgroundImage">
+          <Card title="Please enter the details" className="custom-card">
+            <Form {...layout} onFinish={onFinish} className="form-container-dk">
+              {showReceiptNo && (
+                <Form.Item
+                  className={showLocation ? 'fadeaway' : 'fadein'}
+                  name="ReceiptNo"
+                  label="Receipt No."
                 >
-                  <Option value="Halifax">Halifax</Option>
-                  <Option value="Dartmouth">Dartmouth</Option>
-                  <Option value="Sackville">Sackville</Option>
-                  <Option value="Bridgewater">Bridgewater</Option>
-                  <Option value="Kentville">Kentville</Option>
-                </Select>
-              </Form.Item>
-            )}
+                  <Input
+                    addonAfter={<EnterOutlined onClick={handleReceiptNoChange} />}
+                    className="receiptno"
+                    ref={inputRef}
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please enter your Receipt Number.',
+                      },
+                    ]}
+                  />
+                </Form.Item>
+              )}
+              {showLocation && (
+                <Form.Item
+                  className={showLocation ? 'fadein' : 'fadeaway'}
+                  name="location"
+                  label="Location"
+                >
+                  <Select
+                    className="select"
+                    placeholder="Select a location"
+                    style={{ width: 200 }}
+                    onChange={handleLocationChange}
+                  >
+                    <Option value="Halifax">Halifax</Option>
+                    <Option value="Dartmouth">Dartmouth</Option>
+                    <Option value="Sackville">Sackville</Option>
+                    <Option value="Bridgewater">Bridgewater</Option>
+                    <Option value="Kentville">Kentville</Option>
+                  </Select>
+                </Form.Item>
+              )}
 
-            {showDatePicker && (
-              <div>
-                <Row
-                  className={`gutter-row datePicker ${showDatePicker ? 'fadein' : 'fadeaway'}`}
-                  gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
-                >
-                  <Col className="calendar" span={12}>
-                    Select Date:
-                    <Calendar
-                      value={selectedDate}
-                      defaultValue={null}
-                      disabledDate={disabledDate}
-                      fullscreen={false}
-                      onSelect={onDateChange}
-                    />
-                  </Col>
-                  <Col span={12}>
-                    Select Slot:
-                    <List
-                      className="slots"
-                      grid={{ gutter: 16, column: 4 }}
-                      dataSource={slots}
-                      renderItem={item => (
-                        <List.Item className="slot">
-                          <Button
-                            onClick={e => onSlotSelect(e)}
-                            type={selectedSlot === item ? 'primary' : 'default'}
-                          >
-                            {item}
-                          </Button>
-                        </List.Item>
-                      )}
-                    />
-                    <span className="selectedSlot">{selectedSlot}</span>
-                  </Col>
-                </Row>
-              </div>
-            )}
-            {showBook && (
-              <Button className="button" type="primary" htmlType="submit">
-                <ArrowRightOutlined />
-                Book
-              </Button>
-            )}
-          </Form>
-        </Card>
-      </Layout>
+              {showDatePicker && (
+                <div>
+                  <Row
+                    className={`gutter-row datePicker ${showDatePicker ? 'fadein' : 'fadeaway'}`}
+                    gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
+                  >
+                    <Col className="calendar" span={12}>
+                      Select Date:
+                      <Calendar
+                        value={selectedDate}
+                        defaultValue={null}
+                        disabledDate={disabledDate}
+                        fullscreen={false}
+                        onSelect={onDateChange}
+                      />
+                    </Col>
+                    <Col span={12}>
+                      Select Slot:
+                      <List
+                        className="slots"
+                        grid={{ gutter: 16, column: 4 }}
+                        dataSource={slots}
+                        renderItem={item => (
+                          <List.Item className="slot">
+                            <Button
+                              onClick={e => onSlotSelect(e)}
+                              type={selectedSlot === item ? 'primary' : 'default'}
+                            >
+                              {item}
+                            </Button>
+                          </List.Item>
+                        )}
+                      />
+                      <span className="selectedSlot">{selectedSlot}</span>
+                    </Col>
+                  </Row>
+                </div>
+              )}
+              {showBook && (
+                <Button className="button" type="primary" htmlType="submit">
+                  <ArrowRightOutlined />
+                  Book
+                </Button>
+              )}
+            </Form>
+          </Card>
+        </Layout>
+      )}
     </div>
   );
 };
