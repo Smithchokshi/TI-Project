@@ -24,7 +24,7 @@ const Header = () => {
     const mobileMenu = (
         <Menu>
             <Menu.Item key="1">
-                <a href="/home">
+                <a href="/dashboard">
                     Home
                 </a>
             </Menu.Item>
