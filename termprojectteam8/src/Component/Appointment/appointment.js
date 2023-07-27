@@ -126,7 +126,7 @@ const Appointment = () => {
         });
       } else {
         setLoading(true);
-        localStorage.setItem('userData', JSON.stringify([user]));
+        localStorage.setItem('loggedInUser', JSON.stringify(user));
         availableSlots.filter(item => item !== user.testDate);
         localStorage.setItem('testBooked', true);
         const locations = JSON.parse(localStorage.getItem('locations'));
@@ -173,8 +173,8 @@ const Appointment = () => {
       return availableSlots ? JSON.parse(availableSlots) : [];
     };
     const getUserDetails = () => {
-      const user = localStorage.getItem('userData');
-      return user ? JSON.parse(user)[0] : {};
+      const user = localStorage.getItem('loggedInUser');
+      return user ? JSON.parse(user) : {};
     };
     const slotsData = getAvailableSlots();
     const userData = getUserDetails();
