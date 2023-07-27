@@ -3,6 +3,7 @@ import { Typography, Card, Row, Col, Button, Table, message, Popconfirm  } from 
 import { CalendarTwoTone, MailTwoTone, EnvironmentTwoTone, RightCircleTwoTone  } from '@ant-design/icons';
 import '../Dashboard/dashboard.css'
 import { useNavigate } from 'react-router-dom';
+
 const { Title } = Typography;
 
 const Dashboard = () => {
@@ -107,12 +108,18 @@ const Dashboard = () => {
     fontWeight: 400,
   };
 
-  const confirm = (e) => {
+  const confirm = async (e) => {
     console.log(e);
     message.success('Appointment Canceled');
     localStorage.setItem('testBooked', false)
     setTestBooked(localStorage.getItem("testBooked"))
-
+    const response = await fetch('https://nek3owgq6i.execute-api.us-east-1.amazonaws.com/1/cancel', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email, testLocation: testLocation, testDate: testDate, name: name } )
+      });
   };
   const cancel = (e) => {
   };
@@ -126,6 +133,7 @@ const Dashboard = () => {
   const [receiptNumber, setReceiptNumber] = useState(null);
   const [classNumber, setClassNumber] = useState(null);
   const [locations, setLocations] = useState(null);
+  const [email, setEmail] = useState(null);
 
   const dataSource = [
     { key: '1', name: name, license: licenseNumber, receipt: receiptNumber, class: classNumber },
@@ -153,7 +161,6 @@ const Dashboard = () => {
     const locations = JSON.parse(localStorage.getItem('locations')); 
     const place = userData[0].testLocation
 
-        // Find the value corresponding to the matched key
     let foundValue;
     for (const key in locations) {
       if (key === place) {
@@ -171,6 +178,7 @@ const Dashboard = () => {
     setReceiptNumber(userData[0].receiptNumber)
     setClassNumber(localStorage.getItem('classNumber'))
     setLocations(locations)
+    setEmail(userData[0].username)
   }, [])
 
   return (
@@ -197,7 +205,8 @@ const Dashboard = () => {
                 <div style={{ fontSize: '17px' }}> After you book an appointment, you receive a confirmation email with your confirmation number, location details and the date and time of your appointment. You also receive a reminder the day before your appointment. </div>
                 <br />
                 <Title style={{ fontSize: '20px' }}>Cancelling and rescheduling: </Title>
-                <div style={{ fontSize: '17px' }}> If you need to change your appointment, follow this link.</div>
+                <span style={{ fontSize: '17px' }}> If you need to change your appointment, follow this </span> <a href="/appointments"><span style={{ color: "blue", fontSize: '17px' }}> link. </span></a>
+
               </div>
             }
             {testBooked === 'false' &&
@@ -213,9 +222,6 @@ const Dashboard = () => {
                 </ul>
                 <Title style={{ fontSize: '20px' }}>After booking: </Title>
                 <div style={{ fontSize: '17px' }}> After you book an appointment, you receive a confirmation email with your confirmation number, location details and the date and time of your appointment. You also receive a reminder the day before your appointment. </div>
-                <br />
-                <Title style={{ fontSize: '20px' }}>Cancelling and rescheduling: </Title>
-                <div style={{ fontSize: '17px' }}> If you need to change your appointment, follow this link.</div>
               </div>
             }
           </Col>
@@ -229,7 +235,6 @@ const Dashboard = () => {
 
         {testBooked === 'false' &&
           <div>
-            <br />
             <Title style={{ fontSize: '20px' }}>Make your appointment here: </Title>
             <Button size="medium" style={bookButtonStyle} onClick={handleButtonClick}>Book here <RightCircleTwoTone twoToneColor={['white', 'black']} /></Button>
             <br />
