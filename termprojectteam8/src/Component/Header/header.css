@@ -1,0 +1,86 @@
+.header{
+    display: flex;
+    alignItems: center;
+    position: relative;
+}
+.secondHeaderCurve{
+    position: absolute;
+    top: 24px;
+    right: 0;
+    width: 65%;
+    height: 100%;
+    background: #36BFF3;
+    zIndex: 0;
+    transform: skewX(330deg);
+}
+.logoContainer1{
+    flex: 0 0 6%;
+    margin-left: 14%;
+}
+.logo1{
+    width: 100%;
+    transform: scale(3);
+}
+.headerCurve{
+       position: absolute;
+       top: 50%;
+       right: 31px;
+       width: 65%;
+       height: 50%;
+       background: rgb(0, 107, 182);
+       borderRadius: 0px;
+       zIndex: 1;
+       transform: skewX(330deg);
+}
+.navList {
+    list-style: none;
+    padding: 10px 100px 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    font-size: 20px;
+    color: white;
+}
+.navItem{
+    margin: 0 10px;
+    color: white;
+}
+.dropdownIcon{
+    fontSize: 14px;
+    marginLeft: 5px;
+}
+.dropdownText{
+    color: white;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 800px) {
+    .navList {
+        display: none ;
+    }
+    .navList2 {
+        display: block ;
+        float: right;
+        margin-top: -5px !important;
+    }
+    .secondHeaderCurve{
+        display: none;
+    }
+    .headerCurve{
+        top: 50%;
+        right: 0;
+        width: 65%;
+        height: 50%;
+        background: rgb(0, 107, 182);
+        borderRadius: 0px;
+        zIndex: 1;
+        transform: skewX(0deg);
+    }
+}
+/* Media query for smaller screens */
+@media (min-width: 800px) {
+    .navList2 {
+        display: none ;
+    }
+}

@@ -1,17 +1,44 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from '../../Assets/logo.svg';
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
+import "./header.css"
 
 const Header = () => {
+    const [name, setName] = useState("");
+
     const profileMenu = (
         <Menu>
+            <Menu.Item key="2">
+                <a
+                    href="/login"
+                    onClick={() => {
+                        localStorage.setItem('isAuthenticated', 'false');
+                    }}
+                >                    Sign Out
+                </a>
+            </Menu.Item>
+        </Menu>
+    );
+
+    const mobileMenu = (
+        <Menu>
             <Menu.Item key="1">
-                <a href="/profile">
-                    Profile
+                <a href="/home">
+                    Home
                 </a>
             </Menu.Item>
             <Menu.Item key="2">
+                <a href="/about">
+                    About
+                </a>
+            </Menu.Item>
+            <Menu.Item key="3">
+                <a href="/contact">
+                    Contact
+                </a>
+            </Menu.Item>
+            <Menu.Item key="4">
                 <a href="/signout">
                     Sign Out
                 </a>
@@ -19,29 +46,48 @@ const Header = () => {
         </Menu>
     );
 
+    useEffect(() => {
+        let data = localStorage.getItem("userData");
+        console.log(data,"data>>>",JSON.parse(data)[0].fullName)
+        setName(JSON.parse(data)[0]?.fullName.toUpperCase())
+    }, [])
+
     return (
-        <header style={styles.header}>
-            {/* Logo */}
-            <div style={styles.logoContainer}>
+        <header className="header">
+            {/* Second Curve (behind the current curve) */}
+            <div className="secondHeaderCurve"></div>
+            {/* Logo  */}
+            <div className="logoContainer1">
                 <a href="/dashboard"> {/* Wrap the image inside anchor tag */}
-                    <img src={logo} alt="Logo" style={styles.logo} />
-                </a>            </div>
-            <div style={styles.headerCurve}>
-                <ul style={styles.navList}>
-                    <li style={styles.navItem}>
-                        <a style={{color:'white'}} href="/dashboard">HOME</a>
+                    <img src={logo} alt="Logo" className="logo1" />
+                </a>
+            </div>
+            <div className="headerCurve">
+                <ul className="navList">
+                    <li className="navItem">
+                        <a style={{ color: 'white', transform: 'skewX(-330deg)' }} href="/dashboard">HOME</a>
                     </li>
-                    <li style={styles.navItem}>
-                        <a style={{color:'white'}} href="/about">ABOUT US</a>
+                    <li className="navItem">
+                        <a style={{ color: 'white', transform: 'skewX(-330deg)' }} href="/about">ABOUT US</a>
                     </li>
-                    <li style={styles.navItem}>
-                        <a style={{color:'white'}} href="/contact">CONTACT</a>
+                    <li className="navItem">
+                        <a style={{ color: 'white', transform: 'skewX(-330deg)' }} href="/contact">CONTACT</a>
                     </li>
-                    <li style={styles.navItem}>
+                    <li className="navItem">
                         <Dropdown overlay={profileMenu} placement="bottomRight" arrow>
-                            <a style={{color:'white'}} href="/dashboard">
-                                <span>SETTINGS</span>
-                                <DownOutlined style={styles.dropdownIcon} />
+                            <a style={{ color: 'white', transform: 'skewX(-330deg)' }} >
+                                <span>Hi, {name}</span>
+                                <DownOutlined className="dropdownIcon" />
+                            </a>
+                        </Dropdown>
+                    </li>
+                </ul>
+                <ul className="navList2">
+                    <li className="navItem">
+                        <Dropdown overlay={mobileMenu} placement="bottomRight" arrow>
+                            <a style={{ color: 'white'}} >
+                                <span>Hi, {name}</span>
+                                <DownOutlined className="dropdownIcon" />
                             </a>
                         </Dropdown>
                     </li>
@@ -49,59 +95,6 @@ const Header = () => {
             </div>
         </header>
     );
-};
-
-const styles = {
-    header: {
-        display: 'flex',
-        alignItems: 'center',
-        background: 'rgb(241 241 240)',
-        position: 'relative', // Required for positioning the ::after pseudo-element
-        border: '1px solid',
-
-    },
-    logoContainer: {
-        flex: '0 0 6%', // 20% width for the logo
-        marginLeft: '14%',
-    },
-    logo: {
-        width: '100%', // Make sure the logo scales within the container
-    },
-    // Adding styles for the ::after pseudo-element to create the curved layer
-    headerCurve: {
-        content: '',
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        width: '60%', // Adjust the width to create the desired curve
-        height: '100%',
-        background: 'rgb(0 107 182)',
-        borderRadius: '-5% 0 0 0%', // Create a half-circle curve on the right
-        zIndex: 1, // Change zIndex to 1 or any positive value to make it visible
-        transform: 'skewX(0deg)', // Skew the curved layer slightly for a unique look
-        boxShadow: '0 0 15px rgba(0, 0, 0, 0.1)', // Add a subtle shadow for depth
-    },
-    navList: {
-        listStyle: 'none',
-        padding: 10,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        height: '100%',
-        fontSize: '20px',
-        color: 'white',
-    },
-    navItem: {
-        margin: '0 10px',
-        color: 'white',
-    },
-    dropdownIcon: {
-        fontSize: '14px',
-        marginLeft: '5px',
-    },
-    dropdownText: {
-        color: 'white',
-    },
 };
 
 export default Header;

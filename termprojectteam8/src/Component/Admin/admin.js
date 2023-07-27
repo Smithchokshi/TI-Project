@@ -33,6 +33,7 @@ const DrivingTestForm = () => {
       setDate('');
       setTime('');
       console.log(availableDates)
+      localStorage.setItem('availableSlots', JSON.stringify(availableDates))
     }
   };
 
