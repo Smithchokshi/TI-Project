@@ -2,13 +2,16 @@
 
 .backgroundImage {
     /*-webkit-background-image: image('../../Assets/logo.svg');*/
-    height: 100%;
-    width: 100%;
+    background-color: #eeeeee;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 999;
 }
 
 .card-content-center {
     background-color: white;
-    margin: 12px 12px;
+    margin: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;

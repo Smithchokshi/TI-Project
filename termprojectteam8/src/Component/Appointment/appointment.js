@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { Button, Calendar, Card, Col, Divider, Form, Input, Layout, List, Row, Select } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Button, Calendar, Card, Col, Form, Input, Layout, List, Row, Select } from 'antd';
 import ArrowRightOutlined, { EnterOutlined } from '@ant-design/icons';
-
+import dayjs from 'dayjs';
 import './appointment.css';
+import { useNavigate } from 'react-router-dom';
 
 const { Option } = Select;
 const Appointment = () => {
+  const navigate = useNavigate();
+
   const [showReceiptNo, setShowReceiptNo] = useState(true);
   const [showLocation, setShowLocation] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -17,6 +20,9 @@ const Appointment = () => {
     date: null,
     time: null,
   });
+  const [availableSlots, setAvailableSlots] = useState([]);
+  const [availableDates, setAvailableDates] = useState([]);
+  const [user, setUser] = useState({});
 
   // dayjs.extend(customParseFormat);
   const range = (start, end) => {
@@ -28,67 +34,95 @@ const Appointment = () => {
   };
 
   const handleReceiptNoChange = event => {
+    setUser(prevUser => ({
+      ...prevUser,
+      receiptNumber: event.target.value,
+    }));
     const receiptNo = event.target.value;
     setShowLocation(receiptNo !== '');
     setShowDatePicker(false);
     setShowReceiptNo(false);
+    // console.log(availableSlots.map(item => item.slice(0, 10)));
+    setAvailableDates(Array.from(new Set(availableSlots.map(item => item.slice(0, 10)))));
   };
 
   const handleLocationChange = value => {
     setSlot(prevState => ({ ...prevState, location: value }));
+    setUser(prevUser => ({
+      ...prevUser,
+      testLocation: value,
+    }));
     setShowDatePicker(value !== '');
+    console.log('availableSlots: ', availableSlots);
+    console.log('availableDates', availableDates);
   };
-
-  // const disabledDates = localStorage.getItem("appointmentDates");
-  const disabledDates = ['2023-07-25', '2023-07-26', '2023-07-27', '2023-07-28', '2023-07-29'];
-  const availableSlots = [
-    '2023-07-28 09:00',
-    '2023-07-27 09:00',
-    '2023-07-27 10:00',
-    '2023-07-29 11:00',
-    '2023-07-29 12:00',
-    // Add more slot data as needed
-  ];
 
   const disabledDate = current => {
     const formattedCurrent = current.format('YYYY-MM-DD');
-    return !disabledDates.includes(formattedCurrent);
+    return !availableDates.includes(formattedCurrent);
   };
 
   const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } };
 
-  const disabledTime = () => ({
-    disabledHours: () => range(0, 9).concat(range(17, 24)),
-    // disabledMinutes: () => range(),
-  });
   const onDateChange = date => {
     // console.log(disabledTime());
     const filteredSlots = availableSlots.filter(item => item.startsWith(date.format('YYYY-MM-DD')));
-
     setSlots(filteredSlots.map(item => item.slice(11)));
-
     setSlot(prevState => ({ ...prevState, date: date.format('YYYY-MM-DD') }));
-    setSelectedSlot(date.format('YYYY-MM-DD'));
+    setSelectedSlot(date.format('Do MMMM, YYYY'));
+
     // console.log(date);
   };
 
   const onSlotSelect = e => {
     // setShowBook(true);
-    setSelectedSlot(prevData => prevData + ' ' + e.value);
-    // setSlot(prevState => ({ ...prevState, time: e.target.innerText }));
-    console.log(e);
+    const date = slot.date;
+    const time = e.target.textContent;
+    setSelectedSlot(
+      dayjs(date, 'YYYY-MM-DD').format('Do MMMM, YYYY') +
+        ' ' +
+        dayjs(time, 'HH:mm').format('h:mm a')
+    );
+    setSlot(prevState => ({ ...prevState, time: e.target.textContent }));
+    // console.log(e);
   };
 
   const onFinish = e => {
     const userData = localStorage.getItem('userData');
-    userData['appointment'] = slot.date + ' ' + slot.time;
+    const appointment = slot.date + ' ' + slot.time;
+    setUser(prevUser => ({ ...prevUser, testDate: appointment }));
     localStorage.setItem('userData', userData);
     availableSlots.filter(item => item !== userData.appointment);
     // localStorage.setItem('availableSlots', availableSlots);
+    localStorage.setItem('testBooked', true);
+    navigate('/dashboard');
   };
 
+  useEffect(() => {
+    const data = [
+      '2023-07-28 09:00',
+      '2023-07-27 09:00',
+      '2023-07-27 10:00',
+      '2023-07-29 11:00',
+      '2023-07-29 12:00',
+    ];
+    localStorage.setItem('availableSlots', JSON.stringify(data));
+    const getAvailableSlots = () => {
+      const availableSlots = localStorage.getItem('availableSlots');
+      return availableSlots ? JSON.parse(availableSlots) : [];
+    };
+    const getUserDetails = () => {
+      const user = localStorage.getItem('userData');
+      return user ? JSON.parse(user)[0] : {};
+    };
+    const slotsData = getAvailableSlots();
+    const userData = getUserDetails();
+    setAvailableSlots(slotsData);
+    setUser(userData);
+  }, []);
+
   return (
-    <>
+    <div className="backgroundImage">
       <Layout className="card-content-center backgroundImage">
         <Card title="Please enter the details" className="custom-card">
           <Form {...layout} onFinish={onFinish} className="form-container-dk">
@@ -134,21 +168,6 @@ const Appointment = () => {
                 >
                   <Col className="calendar" span={12}>
                     Select Date:
-                    {/*<Form.Item name="slot">*/}
-                    {/*  <DatePicker*/}
-                    {/*    className="datePicker"*/}
-                    {/*    format="YYYY-MM-DD HH:mm"*/}
-                    {/*    disabledDate={disabledDate}*/}
-                    {/*    // disabledTime={disabledTime}*/}
-                    {/*    onChange={onChange}*/}
-                    {/*    // showTime={{*/}
-                    {/*    //   defaultValue: dayjs('09:00:00', 'HH:mm:ss'),*/}
-                    {/*    //   hideDisabledOptions: true,*/}
-                    {/*    //   format: 'HH:mm',*/}
-                    {/*    //   minuteStep: 30,*/}
-                    {/*    // }}*/}
-                    {/*  />*/}
-                    {/*</Form.Item>*/}
                     <Calendar
                       disabledDate={disabledDate}
                       fullscreen={false}
@@ -164,7 +183,7 @@ const Appointment = () => {
                       renderItem={item => (
                         <List.Item className="slot">
                           <Button
-                            onClick={() => onSlotSelect(slot)}
+                            onClick={e => onSlotSelect(e)}
                             type={selectedSlot === item ? 'primary' : 'default'}
                           >
                             {item}
@@ -186,7 +205,7 @@ const Appointment = () => {
           </Form>
         </Card>
       </Layout>
-    </>
+    </div>
   );
 };
 
