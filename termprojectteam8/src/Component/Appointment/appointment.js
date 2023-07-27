@@ -78,10 +78,15 @@ const Appointment = () => {
   const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } };
 
   const onDateChange = date => {
+    setSelectedDate(date);
     // console.log(disabledTime());
     const filteredSlots = availableSlots.filter(item => item.startsWith(date.format('YYYY-MM-DD')));
     setSlots(filteredSlots.map(item => item.slice(11)));
-    setSlot(prevState => ({ ...prevState, date: date.format('YYYY-MM-DD') }));
+    setSlot(prevState => ({
+      ...prevState,
+      date: date.format('YYYY-MM-DD'),
+      time: null,
+    }));
     setSelectedSlot(date.format('Do MMMM, YYYY'));
   };
 
@@ -94,7 +99,7 @@ const Appointment = () => {
         ' ' +
         dayjs(time, 'HH:mm').format('h:mm a')
     );
-    setSlot(prevState => ({ ...prevState, time: e.target.textContent }));
+    setSlot(prevState => ({ ...prevState, time: time }));
     setUser(prevUser => ({
       ...prevUser,
       testDate: date + ' ' + time,
@@ -104,40 +109,47 @@ const Appointment = () => {
 
   const onFinish = async e => {
     try {
-      localStorage.setItem('userData', JSON.stringify([user]));
-      availableSlots.filter(item => item !== user.testDate);
-      localStorage.setItem('testBooked', true);
-      const locations = JSON.parse(localStorage.getItem('locations'));
-      const response = await fetch(
-        'https://nek3owgq6i.execute-api.us-east-1.amazonaws.com/1/book',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: user.username,
-            testLocation: locations[user.testLocation],
-            testDate: selectedSlot,
-            name: user.fullName,
-          }),
+      if (slot.time == null) {
+        notification.warning({
+          message: 'Warning',
+          description: 'Please select time slot.',
+        });
+      } else {
+        localStorage.setItem('userData', JSON.stringify([user]));
+        availableSlots.filter(item => item !== user.testDate);
+        localStorage.setItem('testBooked', true);
+        const locations = JSON.parse(localStorage.getItem('locations'));
+        const response = await fetch(
+          'https://nek3owgq6i.execute-api.us-east-1.amazonaws.com/1/book',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: user.username,
+              testLocation: locations[user.testLocation],
+              testDate: selectedSlot,
+              name: user.fullName,
+            }),
+          }
+        );
+        if (response.ok) {
+          const place = user.testLocation;
+          notification.success({
+            message: 'Appointment Booked!',
+            description:
+              'Appointment has been booked and confirmation email has been sent to your registered email!',
+          });
         }
-      );
-      if (response.ok) {
-        const place = user.testLocation;
-        notification.success({
-          message: 'Appointment Booked!',
-          description:
-            'Appointment has been booked and confirmation email has been sent to your registered email!',
-        });
+        if (!response.ok) {
+          notification.error({
+            message: 'Error',
+            description: 'Some error occurred. Please try booking again.',
+          });
+        }
+        navigate('/dashboard');
       }
-      if (!response.ok) {
-        notification.error({
-          message: 'Error',
-          description: 'Some error occurred. Please try booking again.',
-        });
-      }
-      navigate('/dashboard');
     } catch (error) {
       console.error('Error occurred during fetch: ', error);
     }
@@ -207,9 +219,10 @@ const Appointment = () => {
                     Select Date:
                     <Calendar
                       value={selectedDate}
+                      defaultValue={null}
                       disabledDate={disabledDate}
                       fullscreen={false}
-                      onChange={onDateChange}
+                      onSelect={onDateChange
                     />
                   </Col>
                   <Col span={12}>

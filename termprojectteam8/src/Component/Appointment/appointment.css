@@ -2,7 +2,7 @@
 
 .backgroundImage {
     /*-webkit-background-image: image('../../Assets/logo.svg');*/
-    background-color: #eeeeee;
+    background-color: #ffffff;
     min-height: 70vh;
     display: flex;
     flex-direction: column;
