@@ -24,7 +24,6 @@ const Appointment = () => {
   const [availableDates, setAvailableDates] = useState([]);
   const [user, setUser] = useState({});
 
-  // dayjs.extend(customParseFormat);
   const range = (start, end) => {
     const result = [];
     for (let i = start; i < end; i++) {
@@ -42,7 +41,6 @@ const Appointment = () => {
     setShowLocation(receiptNo !== '');
     setShowDatePicker(false);
     setShowReceiptNo(false);
-    // console.log(availableSlots.map(item => item.slice(0, 10)));
     setAvailableDates(Array.from(new Set(availableSlots.map(item => item.slice(0, 10)))));
   };
 
@@ -70,12 +68,10 @@ const Appointment = () => {
     setSlots(filteredSlots.map(item => item.slice(11)));
     setSlot(prevState => ({ ...prevState, date: date.format('YYYY-MM-DD') }));
     setSelectedSlot(date.format('Do MMMM, YYYY'));
-
-    // console.log(date);
   };
 
   const onSlotSelect = e => {
-    // setShowBook(true);
+    setShowBook(true);
     const date = slot.date;
     const time = e.target.textContent;
     setSelectedSlot(
@@ -99,14 +95,6 @@ const Appointment = () => {
   };
 
   useEffect(() => {
-    const data = [
-      '2023-07-28 09:00',
-      '2023-07-27 09:00',
-      '2023-07-27 10:00',
-      '2023-07-29 11:00',
-      '2023-07-29 12:00',
-    ];
-    localStorage.setItem('availableSlots', JSON.stringify(data));
     const getAvailableSlots = () => {
       const availableSlots = localStorage.getItem('availableSlots');
       return availableSlots ? JSON.parse(availableSlots) : [];
@@ -161,7 +149,6 @@ const Appointment = () => {
 
             {showDatePicker && (
               <div>
-                {/*<Divider />*/}
                 <Row
                   className={`gutter-row datePicker ${showDatePicker ? 'fadein' : 'fadeaway'}`}
                   gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
