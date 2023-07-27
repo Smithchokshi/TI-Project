@@ -10,6 +10,7 @@ const Register = lazy(() => import('./Component/Register/register'));
 const Appointment = lazy(() => import('./Component/Appointment/appointment'));
 const Dashboard = lazy(() => import('./Component/Dashboard/dashboard'));
 const PageNotFound = lazy(() => import('./Component/404/404'));
+const Contact = lazy(() => import('./Component/Contact/contactUs'));
 
 
 const { Content } = Layout;
@@ -49,6 +50,10 @@ const Routing = () => {
     {
       path: '*',
       component: <PageNotFound />,
+    },
+    {
+      path: '/contact',
+      component: <Contact />,
     }
   ].filter(cur => cur);
 
