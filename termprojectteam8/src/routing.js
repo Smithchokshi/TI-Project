@@ -126,7 +126,7 @@ const Routing = () => {
 
     const user = JSON.parse(localStorage.getItem('loggedInUser'));
     if (user?.isAdmin) navigate('/admin');
-    else navigate('/dashboard');
+    else navigate(window.location.pathname);
   }, []);
 
   return (

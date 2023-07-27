@@ -5,7 +5,7 @@ import { DownOutlined } from '@ant-design/icons';
 import './header.css';
 
 const Header = () => {
-  const [name, setName] = useState('');
+  const [user, setUser] = useState('');
 
   const profileMenu = (
     <Menu>
@@ -42,9 +42,7 @@ const Header = () => {
   );
 
   useEffect(() => {
-    let data = localStorage.getItem('userData');
-    console.log(data, 'data>>>', JSON.parse(data)[0].fullName);
-    setName(JSON.parse(data)[0]?.fullName.toUpperCase());
+    setUser(JSON.parse(localStorage.getItem('loggedInUser')));
   }, []);
 
   return (
@@ -61,25 +59,29 @@ const Header = () => {
       </div>
       <div className="headerCurve">
         <ul className="navList">
-          <li className="navItem">
-            <a style={{ color: 'white', transform: 'skewX(-330deg)' }} href="/dashboard">
-              HOME
-            </a>
-          </li>
-          <li className="navItem">
-            <a style={{ color: 'white', transform: 'skewX(-330deg)' }} href="/about">
-              ABOUT US
-            </a>
-          </li>
-          <li className="navItem">
-            <a style={{ color: 'white', transform: 'skewX(-330deg)' }} href="/contact">
-              CONTACT
-            </a>
-          </li>
+          {!user?.isAdmin && (
+            <>
+              <li className="navItem">
+                <a style={{ color: 'white', transform: 'skewX(-330deg)' }} href="/dashboard">
+                  HOME
+                </a>
+              </li>
+              <li className="navItem">
+                <a style={{ color: 'white', transform: 'skewX(-330deg)' }} href="/about">
+                  ABOUT US
+                </a>
+              </li>
+              <li className="navItem">
+                <a style={{ color: 'white', transform: 'skewX(-330deg)' }} href="/contact">
+                  CONTACT
+                </a>
+              </li>
+            </>
+          )}
           <li className="navItem">
             <Dropdown overlay={profileMenu} placement="bottomRight" arrow>
               <a style={{ color: 'white', transform: 'skewX(-330deg)' }}>
-                <span>Hi, {name}</span>
+                <span>Hi, {user?.fullName}</span>
                 <DownOutlined className="dropdownIcon" />
               </a>
             </Dropdown>
@@ -89,7 +91,7 @@ const Header = () => {
           <li className="navItem">
             <Dropdown overlay={mobileMenu} placement="bottomRight" arrow>
               <a style={{ color: 'white' }}>
-                <span>Hi, {name}</span>
+                <span>Hi, {user?.fullName}</span>
                 <DownOutlined className="dropdownIcon" />
               </a>
             </Dropdown>
