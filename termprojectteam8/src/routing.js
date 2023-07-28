@@ -11,6 +11,7 @@ const Appointment = lazy(() => import('./Component/Appointment/appointment'));
 const Dashboard = lazy(() => import('./Component/Dashboard/dashboard'));
 const PageNotFound = lazy(() => import('./Component/404/404'));
 const Contact = lazy(() => import('./Component/Contact/contactUs'));
+const About = lazy(() => import('./Component/AboutUs/about'));
 
 
 const { Content } = Layout;
@@ -54,6 +55,10 @@ const Routing = () => {
     {
       path: '/contact',
       component: <Contact />,
+    },
+    {
+      path: '/about',
+      component: <About />,
     }
   ].filter(cur => cur);
 
