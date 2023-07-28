@@ -126,9 +126,16 @@ const Appointment = () => {
         });
       } else {
         setLoading(true);
-        localStorage.setItem('loggedInUser', JSON.stringify(user));
+
         availableSlots.filter(item => item !== user.testDate);
-        localStorage.setItem('testBooked', true);
+        const tempData = user;
+        tempData.testBooked = true;
+        setUser(prevState => ({
+          ...prevState,
+              testBooked: true
+        }));
+
+        // localStorage.setItem('testBooked', true);
         const locations = JSON.parse(localStorage.getItem('locations'));
         const response = await fetch(
           'https://nek3owgq6i.execute-api.us-east-1.amazonaws.com/1/book',
@@ -155,7 +162,8 @@ const Appointment = () => {
               e.receiptNumber = user.receiptNumber;
             }
           });
-          localStorage.setItem("userData", JSON.stringify(allUsers))
+          localStorage.setItem("userData", JSON.stringify(allUsers));
+          localStorage.setItem('loggedInUser', JSON.stringify(tempData));
           notification.success({
             message: 'Appointment Booked!',
             description:
