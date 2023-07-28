@@ -15,7 +15,7 @@ const About = () => {
         border: '2px',
         paddingLeft: '10%',
         paddingRight: '10%',
-        height: '180vh'
+        height: '161vh'
     };
     const customStyle = {
         fontFamily: 'open_sansregular,Helvetica,Arial,Tahoma,sans-serif',
