@@ -10,6 +10,8 @@ const Register = lazy(() => import('./Component/Register/register'));
 const Appointment = lazy(() => import('./Component/Appointment/appointment'));
 const Dashboard = lazy(() => import('./Component/Dashboard/dashboard'));
 const PageNotFound = lazy(() => import('./Component/404/404'));
+const Contact = lazy(() => import('./Component/Contact/contactUs'));
+
 
 const { Content } = Layout;
 
@@ -49,6 +51,10 @@ const Routing = () => {
       path: '*',
       component: <PageNotFound />,
     },
+    {
+      path: '/contact',
+      component: <Contact />,
+    }
   ].filter(cur => cur);
 
   const PrivateRoute = ({ children }) => {
@@ -62,7 +68,7 @@ const Routing = () => {
   };
 
   useEffect(() => {
-    const testBooked = localStorage.getItem('testBooked');
+    // const testBooked = localStorage.getItem('testBooked');
     const isAuthenticated = localStorage.getItem('isAuthenticated');
 
     const userData = JSON.parse(localStorage.getItem('userData'));
@@ -101,9 +107,9 @@ const Routing = () => {
       localStorage.setItem('isAuthenticated', false);
     }
 
-    if (testBooked === null) {
-      localStorage.setItem('testBooked', false);
-    }
+    // if (testBooked === null) {
+    //   localStorage.setItem('testBooked', false);
+    // }
     const classNumber = localStorage.getItem('classNumber');
     if (classNumber === null) {
       localStorage.setItem('classNumber', 'Class 5 - Single Vehicle or Combination');
